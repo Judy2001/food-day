@@ -4,10 +4,9 @@
 <body>
     <h1 th:text="${title}">Default Title</h1>
 
-    <p th:unless="${persons} and ${persons.size()}">No one is bringing food  :(</p>
+    <nav th:replace="fragments :: navigation"></nav>
 
-    <a href="/food/add">Add Person</a>
-    <a href="/food/add_food">Add Food</a>
+    <p th:unless="${persons} and ${persons.size()}">No one is bringing food  :(</p>
 
     <ul>
         <li th:each="person : ${persons}" th:text="${person}"></li>
