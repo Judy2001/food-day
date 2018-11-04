@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragments :: head"></head>
-<body>
+
+<body class="container body-content">
+
     <h1 th:text="${title}">Default Title</h1>
 
     <nav th:replace="fragments :: navigation"></nav>
 
     <p th:unless="${persons} and ${persons.size()}">No one is bringing food  :(</p>
 
-    <ul>
-        <li th:each="person : ${persons}" th:text="${person}"></li>
-    </ul>
+    <table class="table">
+
+        <tr>
+            <th>Name</th>
+            <th>Bringing</th>
+        </tr>
+
+        <tr th:each="person : ${persons}">
+            <td th:text="${person.key}"></td>
+            <td th:text="${person.value}"></td>
+        </tr>
+
+    </table>
 
 </body>
+
 </html>

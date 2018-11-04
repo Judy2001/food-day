@@ -7,18 +7,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 @RequestMapping("food")
 public class PersonController {
 
-    static ArrayList<String> persons = new ArrayList<>();
+    static HashMap<String, String> persons = new HashMap<>();
 
     @RequestMapping(value = "")
     public String index(Model model) {
 
         model.addAttribute("persons", persons);
-        model.addAttribute("title", "Food Day");
+        model.addAttribute("title", "Food Day!");
 
         return "food/index";
     }
@@ -32,10 +33,32 @@ public class PersonController {
         return "food/add";
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddFoodForm(@RequestParam String personName) {
 
-        persons.add(personName);
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String processAddFoodForm(@RequestParam String personName, @RequestParam String foodName) {
+
+        persons.put(personName, foodName);
+
+        return "redirect:";
+    }
+
+
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemovePersonForm(Model model) {
+
+        model.addAttribute("persons", persons.keySet());
+        model.addAttribute("title", "Remove Person");
+
+        return "food/remove";
+    }
+
+
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemovePersonForm(@RequestParam ArrayList<String> person) {
+
+        for (String aPerson : person) {
+            persons.remove(aPerson);
+        }
 
         return "redirect:";
     }
