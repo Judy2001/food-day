@@ -11,8 +11,8 @@
     <form method="post" style="max-width:300px;">
 
         <div th:each="person : ${persons}" class="checkbox">
-            <input type="checkbox" name="person" th:value="${person}" th:id="${person}" />
-            <label th:for="${person}" th:text="${person}"></label>
+            <input type="checkbox" name="personIds" th:value="${person.personId}" th:id="${person.personId}" />
+            <label th:for="${person.personId}" th:text="${person.name}"></label>
             <br />
         </div>
 
