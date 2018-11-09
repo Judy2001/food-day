@@ -1,5 +1,6 @@
 package org.launchcode.foodday.controllers;
 
+import org.launchcode.foodday.models.Date;
 import org.launchcode.foodday.models.Person;
 import org.launchcode.foodday.models.PersonData;
 import org.springframework.stereotype.Controller;
@@ -9,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-
 
 @Controller
 @RequestMapping("food")
 public class PersonController {
 
 
+    String date = "null";
+
+
     @RequestMapping(value = "")
     public String index(Model model) {
-
         model.addAttribute("persons", PersonData.getAll());
         model.addAttribute("title", "Food Day!");
 
@@ -27,9 +28,24 @@ public class PersonController {
     }
 
 
+    @RequestMapping(value = "date", method = RequestMethod.GET)
+    public String displayDateForm(Model model) {
+        model.addAttribute("title", "Change Date");
+
+        return "food/date";
+    }
+
+
+    @RequestMapping(value = "date", method = RequestMethod.POST)
+    public String processDateForm(Model model) {
+        model.addAttribute(new Date());
+
+        return "redirect:";
+    }
+
+
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddPersonForm(Model model) {
-
         model.addAttribute("title", "Add Person");
 
         return "food/add";
@@ -38,7 +54,6 @@ public class PersonController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddPersonForm(@ModelAttribute Person newPerson) {
-
         PersonData.add(newPerson);
 
         return "redirect:";
@@ -47,7 +62,6 @@ public class PersonController {
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemovePersonForm(Model model) {
-
         model.addAttribute("persons", PersonData.getAll());
         model.addAttribute("title", "Remove Person");
 
@@ -57,7 +71,6 @@ public class PersonController {
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemovePersonForm(@RequestParam int[] personIds) {
-
         for (int personId : personIds) {
             PersonData.remove(personId);
         }

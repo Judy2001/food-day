@@ -4,11 +4,20 @@ import java.util.ArrayList;
 
 public class PersonData {
 
+
+    public static String date;
+
+
     static ArrayList<Person> persons = new ArrayList<>();
 
 
     public static ArrayList<Person> getAll() {
         return persons;
+    }
+
+
+    public String getIt() {
+        return date;
     }
 
 
@@ -34,6 +43,15 @@ public class PersonData {
         }
 
         return thePerson;
+    }
+
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
 }

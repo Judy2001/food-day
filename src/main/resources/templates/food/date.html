@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+    <h1 th:text="${title}">Default Title</h1>
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <form method="post" style="max-width:300px;">
+        <div class="form-group">
+            <label for="date-field">Date</label>
+            <input class="form-control" id="date-field" type="text" name="date" />
+        </div>
+    </form>
+
+    <input type="submit" value="Change Date" />
+</body>
+
+</html>
