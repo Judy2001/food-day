@@ -6,7 +6,7 @@
 <body class="container body-content">
     <h1 th:text="${title}">Default Title</h1>
 
-    <nav th:replace="fragments :: navigation"></nav>
+    <br />
 
     <form method="post" style="max-width:300px;">
         <div class="form-group">
@@ -19,9 +19,15 @@
             <input class="form-control" id="food-field" type="text" name="food" />
         </div>
 
+        <br />
         <input type="submit" value="Add Person" />
 
     </form>
+
+    <br />
+    <br />
+
+    <nav th:replace="fragments :: navigation"></nav>
 
 </body>
 

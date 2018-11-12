@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:fragment="head">
-    <meta charset="UTF-8"/>
+
     <title th:text="${title}">Food Day</title>
+    <br />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -11,11 +12,14 @@
 
 <body>
 
-<nav th:fragment="navigation">
-    <a href="/food">Home</a> |
-    <a href="/food/add">Add Person</a> |
-    <a href="/food/remove">Remove Person</a>
-</nav>
+    <nav th:fragment="navigation">
+        <a href="/food/index">Current Food Day</a> |
+        <a href="/date/index">All Food Days</a> |
+        <a href="/new-date">Add Date</a> |
+        <a href="/date/remove">Remove Date</a>
+
+        <br />
+    </nav>
 
 </body>
 </html>

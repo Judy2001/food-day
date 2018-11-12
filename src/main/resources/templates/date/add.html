@@ -6,16 +6,22 @@
 <body class="container body-content">
     <h1 th:text="${title}">Default Title</h1>
 
-    <nav th:replace="fragments :: navigation"></nav>
+    <br />
 
     <form method="post" style="max-width:300px;">
         <div class="form-group">
             <label for="date-field">Date</label>
             <input class="form-control" id="date-field" type="text" name="date" />
         </div>
+
+        <input type="submit" value="Add Date" />
     </form>
 
-    <input type="submit" value="Change Date" />
+    <br />
+    <br />
+
+    <nav th:replace="fragments :: navigation"></nav>
+
 </body>
 
 </html>

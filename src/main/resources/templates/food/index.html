@@ -10,7 +10,6 @@
     <h3 th:text="${date}">Date</h3>
     <br />
 
-    <nav th:replace="fragments :: navigation"></nav>
     <br />
     <a href="/food/add">Add Person</a> |
     <a href="/food/remove">Remove Person</a>
@@ -33,6 +32,10 @@
         </tr>
 
     </table>
+
+    <br />
+
+    <nav th:replace="fragments :: navigation"></nav>
 
 </body>
 

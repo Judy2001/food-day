@@ -6,8 +6,6 @@
 <body class="container body-content">
     <h1 th:text="${title}">Default Title</h1>
 
-    <nav th:replace="fragments :: navigation"></nav>
-
     <form method="post">
 
         <div th:each="person : ${persons}" class="checkbox">
@@ -19,6 +17,11 @@
         <input type="submit" value="Remove Person" />
 
     </form>
+
+    <br />
+    <br />
+
+    <nav th:replace="fragments :: navigation"></nav>
 
 </body>
 
