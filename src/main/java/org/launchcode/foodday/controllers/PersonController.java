@@ -1,7 +1,9 @@
 package org.launchcode.foodday.controllers;
 
+import org.launchcode.foodday.models.DateData;
 import org.launchcode.foodday.models.Person;
 import org.launchcode.foodday.models.PersonData;
+import org.launchcode.foodday.models.Date;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,8 +48,8 @@ public class PersonController {
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemovePersonForm(Model model) {
-        model.addAttribute("persons", PersonData.getAll());
         model.addAttribute("title", "Remove Person");
+        model.addAttribute("persons", PersonData.getAll());
 
         return "food/remove";
     }

@@ -3,17 +3,20 @@ package org.launchcode.foodday.models;
 public class Date {
 
     private int id;
-
+    private static int nextId =1;
     private String date;
 
 
-    public Date(int id, String date) {
+    public Date(String date) {
+        this();
         this.id = id;
         this.date = date;
     }
 
 
     public Date() {
+        id = nextId;
+        nextId++;
     }
 
 
