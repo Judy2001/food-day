@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+
+    <h1 th:text="${title}">Default Title</h1>
+
+    <table class="table">
+
+        <tr>
+            <th>Dates</th>
+        </tr>
+
+        <tr th:each="date : ${dates}">
+            <td th:text="${date}"></td>
+        </tr>
+
+    </table>
+
+    <br />
+    <a href="/food">Current Food Day</a> |
+    <a href="/date/add">Add Date</a> |
+    <a href="/date/remove">Remove Date</a>
+
+</body>
+
+</html>
