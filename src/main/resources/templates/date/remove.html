@@ -12,11 +12,11 @@
 
         <div th:each="date : ${dates}" class="checkbox">
             <input type="checkbox" name="dateIds" th:value="${date.id}" th:id="${date.id}" />
-            <label th:for="${date.id}" th:text="${date}"></label>
+            <label th:for="${date.id}" th:text="${date.date}"></label>
             <br />
         </div>
 
-        <input type="submit" value="Remove Person" />
+        <input type="submit" value="Remove Date" />
 
     </form>
 
