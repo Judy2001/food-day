@@ -7,16 +7,14 @@
 
     <h1 th:text="${title}">Default Title</h1>
 
-    <table class="table">
+    <p th:unless="${dates} and ${dates.size()}">No dates :(</p>
 
-        <tr th:each="date : ${dates}">
-            <td th:text="${date.date}"></td>
-        </tr>
-
-    </table>
+    <ul>
+        <li th:each="date : ${dates}"><a th:href="'food/index/' + ${date.id}" th:text="${date.date}"></a></li>
+    </ul>
 
     <br />
-    <a href="/food">Current Food Day</a> |
+    <a href="/food">Home</a> |
     <a href="/date/add">Add Date</a> |
     <a href="/date/remove">Remove Date</a>
 
