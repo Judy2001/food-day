@@ -1,12 +1,11 @@
 package org.launchcode.foodday.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -27,6 +26,10 @@ public class Person {
     @ManyToOne
     private FoodDay foodDay;
 
+    @OneToMany
+    @JoinColumn(name = "food_day_id")
+    private List<Person> persons = new ArrayList<>();
+
 
     public Person(String name, String food) {
         this.name = name;
@@ -35,6 +38,11 @@ public class Person {
 
 
     public Person() {
+    }
+
+
+    public List<Person> getPersons() {
+        return persons;
     }
 
 
