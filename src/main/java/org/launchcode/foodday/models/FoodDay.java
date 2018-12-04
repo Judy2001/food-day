@@ -45,4 +45,8 @@ public class FoodDay {
         this.date = date;
     }
 
+
+    public List<Person> getPersons() {
+        return persons;
+    }
 }

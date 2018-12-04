@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
@@ -83,6 +84,17 @@ public class PersonController {
         }
 
         return "redirect:";
+    }
+
+
+    @RequestMapping(value = "date", method = RequestMethod.GET)
+    public String date(Model model, @RequestParam int id) {
+
+        FoodDay date = foodDayDao.findOne(id);
+        List<Person> persons = date.getPersons();
+        model.addAttribute("date", date);
+        model.addAttribute("title", "Food brought on " + date.getDate());
+        return "food/index";
     }
 
 }

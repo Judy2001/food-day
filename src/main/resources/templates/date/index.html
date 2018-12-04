@@ -10,7 +10,9 @@
     <p th:unless="${dates} and ${dates.size()}">No dates :(</p>
 
     <ul>
-        <li th:each="date : ${dates}"><a th:href="'food/index/' + ${date.id}" th:text="${date.date}"></a></li>
+        <li th:each="date : ${dates}">
+            <a th:href="'/food/date?id=' + ${date.id}" th:text="${foodDay.date}"></a>
+        </li>
     </ul>
 
     <br />
