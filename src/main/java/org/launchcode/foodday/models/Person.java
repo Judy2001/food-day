@@ -26,10 +26,6 @@ public class Person {
     @ManyToOne
     private FoodDay foodDay;
 
-    @OneToMany
-    @JoinColumn(name = "food_day_id")
-    private List<Person> persons = new ArrayList<>();
-
 
     public Person(String name, String food) {
         this.name = name;
@@ -38,11 +34,6 @@ public class Person {
 
 
     public Person() {
-    }
-
-
-    public List<Person> getPersons() {
-        return persons;
     }
 
 
