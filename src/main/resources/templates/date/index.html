@@ -5,12 +5,14 @@
 
 <body class="container">
     <h1 th:text="${title}">Default Title</h1>
+    <br />
 
     <p th:unless="${dates} and ${dates.size()}">No dates :(</p>
 
     <tr th:each="date : ${dates}">
-        <!--<td><a th:href="'/date/index?id=' + ${date.id}">${foodDay.date}</a></td>-->
-        <td th:text="${foodDay.date}" ></td>
+        <td><a th:href="'/date/index?id=' + ${date.id}">${foodDay.date}</a></td>
+        <br />
+        <br />
     </tr>
 
     <br />
