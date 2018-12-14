@@ -1,4 +1,6 @@
-package org.launchcode.foodday.models;
+package org.launchcode.foodday.models.data;
+
+import org.launchcode.foodday.models.Person;
 
 import java.util.ArrayList;
 

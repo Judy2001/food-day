@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+    <h1 th:text="${title}">Default Title</h1>
+
+    <br />
+
+    <form method="post" style="max-width:300px;">
+        <div class="form-group">
+            <label for="person-field">Person</label>
+            <input class="form-control" id="person-field" type="text" name="name" />
+        </div>
+
+        <div>
+            <label for="food-field">Food</label>
+            <input class="form-control" id="food-field" type="text" name="food" />
+        </div>
+
+        <br />
+        <input type="submit" value="Add Person" />
+
+    </form>
+
+    <br />
+    <br />
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+</body>
+
+</html>

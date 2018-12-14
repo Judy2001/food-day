@@ -1,0 +1,9 @@
+/*
+package org.launchcode.foodday.models.data;
+
+import org.launchcode.foodday.models.Person;
+import org.springframework.data.repository.CrudRepository;
+
+public interface PersonDao extends CrudRepository<Person, Integer> {
+}
+*/

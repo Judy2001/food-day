@@ -1,20 +1,13 @@
 package org.launchcode.foodday.controllers;
 
 import org.launchcode.foodday.models.Person;
-import org.launchcode.foodday.models.data.PersonDao;
-import org.launchcode.foodday.models.FoodDay;
-import org.launchcode.foodday.models.data.FoodDayDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.launchcode.foodday.models.data.PersonData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.validation.Valid;
-import java.util.List;
 
 
 @Controller
@@ -22,19 +15,12 @@ import java.util.List;
 public class PersonController {
 
 
-    @Autowired
-    private PersonDao personDao;
-
-    @Autowired
-    private FoodDayDao foodDayDao;
-
-
     @RequestMapping(value = "")
-    public String index(Model model, @ModelAttribute FoodDay date) {
+    public String index(Model model) {
 
-        model.addAttribute("persons", personDao.findAll());
+        model.addAttribute("persons", PersonData.getAll());
         model.addAttribute("title", "Food Day!");
-        model.addAttribute("date", "${foodDay.date}");
+        model.addAttribute("date", "${date}");
 
         return "food/index";
     }
@@ -44,24 +30,15 @@ public class PersonController {
     public String displayAddPersonForm(Model model) {
 
         model.addAttribute("title", "Add Person");
-        model.addAttribute(new Person());
-        model.addAttribute("dates", foodDayDao.findAll());
 
         return "food/add";
     }
 
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddPersonForm(@ModelAttribute  @Valid Person newPerson, @ModelAttribute FoodDay newFoodDay,
-                                       Errors errors, @RequestParam int foodDayId, Model model) {
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Person");
-            return "food/add";
-        }
+    public String processAddPersonForm(@ModelAttribute Person newPerson) {
 
-        FoodDay date = foodDayDao.findOne(foodDayId);
-        //newPerson.setFoodDay(date);
-        personDao.save(newPerson);
+        PersonData.add(newPerson);
 
         return "redirect:";
     }
@@ -70,7 +47,7 @@ public class PersonController {
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemovePersonForm(Model model) {
         model.addAttribute("title", "Remove Person");
-        model.addAttribute("persons", personDao.findAll());
+        model.addAttribute("persons", PersonData.getAll());
 
         return "food/remove";
     }
@@ -80,21 +57,10 @@ public class PersonController {
     public String processRemovePersonForm(@RequestParam int[] personIds) {
         for (int personId : personIds) {
 
-            personDao.delete(personId);
+            PersonData.remove(personId);
         }
 
         return "redirect:";
-    }
-
-
-    @RequestMapping(value = "date", method = RequestMethod.GET)
-    public String date(Model model, @RequestParam int id) {
-
-        FoodDay date = foodDayDao.findOne(id);
-        List<Person> persons = date.getPersons();
-        model.addAttribute("date", date);
-        model.addAttribute("title", "Food brought on " + date.getDate());
-        return "food/index";
     }
 
 }

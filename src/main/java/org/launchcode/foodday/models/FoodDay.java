@@ -19,9 +19,9 @@ public class FoodDay {
     @Size(min=3, message = "Enter a date")
     private String date;
 
-    @OneToMany
-    @JoinColumn(name = "food_day_id")
-    private List<Person> persons = new ArrayList<>();
+    //@OneToMany
+    //@JoinColumn(name = "food_day_id")
+    private ArrayList<Person> persons = new ArrayList<>();
 
 
     public FoodDay(String date) {
@@ -50,4 +50,6 @@ public class FoodDay {
         this.date = date;
     }
 
+    public void setFoodDay(FoodDay date) {
+    }
 }

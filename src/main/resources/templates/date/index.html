@@ -3,17 +3,15 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body class="container body-content">
-
+<body class="container">
     <h1 th:text="${title}">Default Title</h1>
 
     <p th:unless="${dates} and ${dates.size()}">No dates :(</p>
 
-    <ul>
-        <li th:each="date : ${dates}">
-            <a th:href="'/food/date?id=' + ${date.id}" th:text="${foodDay.date}"></a>
-        </li>
-    </ul>
+    <tr th:each="date : ${dates}">
+        <!--<td><a th:href="'/date/index?id=' + ${date.id}">${foodDay.date}</a></td>-->
+        <td th:text="${foodDay.date}" ></td>
+    </tr>
 
     <br />
     <a href="/food">Home</a> |
