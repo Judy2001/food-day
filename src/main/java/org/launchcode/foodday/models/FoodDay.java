@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity
+//@Entity
 public class FoodDay {
 
-    @Id
-    @GeneratedValue
+    //@Id
+    //@GeneratedValue
     private int id;
+
 
     @NotNull
     @Size(min=3, message = "Enter a date")
@@ -30,6 +31,8 @@ public class FoodDay {
 
 
     public FoodDay() {
+        id=1;
+        id++;
     }
 
 

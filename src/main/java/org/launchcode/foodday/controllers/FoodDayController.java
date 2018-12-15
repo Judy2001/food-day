@@ -18,7 +18,7 @@ public class FoodDayController {
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("title", "Dates");
+        model.addAttribute("title", "Food Day Dates");
         model.addAttribute("dates", FoodDayData.getAll());
 
         return "date/index";

@@ -1,6 +1,8 @@
 package org.launchcode.foodday.controllers;
 
+import org.launchcode.foodday.models.FoodDay;
 import org.launchcode.foodday.models.Person;
+import org.launchcode.foodday.models.data.FoodDayData;
 import org.launchcode.foodday.models.data.PersonData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,7 @@ public class PersonController {
 
         model.addAttribute("persons", PersonData.getAll());
         model.addAttribute("title", "Food Day!");
-        model.addAttribute("date", "${date}");
+        //model.addAttribute("date", FoodDayData.getById(id));
 
         return "food/index";
     }
