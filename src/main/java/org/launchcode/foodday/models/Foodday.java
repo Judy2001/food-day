@@ -8,37 +8,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//@Entity
-public class FoodDay {
+@Entity
+public class Foodday {
 
-    //@Id
-    //@GeneratedValue
+    @Id
+    @GeneratedValue
     private int id;
-
 
     @NotNull
     @Size(min=3, message = "Enter a date")
     private String date;
 
     //@OneToMany
-    //@JoinColumn(name = "food_day_id")
-    private ArrayList<Person> persons = new ArrayList<>();
+    //@JoinColumn(name = "foodday_id")
+    //private ArrayList<Person> persons = new ArrayList<>();
 
 
-    public FoodDay(String date) {
+    public Foodday(String date) {
         this.date = date;
     }
 
 
-    public FoodDay() {
-        id=1;
-        id++;
-    }
+    public Foodday() { }
 
 
-    public List<Person> getPersons() {
+/*    public List<Person> getPersons() {
         return persons;
-    }
+    }*/
 
 
     public int getId() {
@@ -53,6 +49,4 @@ public class FoodDay {
         this.date = date;
     }
 
-    public void setFoodDay(FoodDay date) {
-    }
 }

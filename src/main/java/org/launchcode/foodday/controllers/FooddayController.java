@@ -1,25 +1,31 @@
 package org.launchcode.foodday.controllers;
 
-import org.launchcode.foodday.models.FoodDay;
-import org.launchcode.foodday.models.data.FoodDayData;
+
+import org.launchcode.foodday.models.Foodday;
+import org.launchcode.foodday.models.data.FooddayDao;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @Controller
 @RequestMapping("date")
-public class FoodDayController {
+public class FooddayController {
+
+    @Autowired
+    private FooddayDao fooddayDao;
 
 
     @RequestMapping(value = "")
     public String index(Model model) {
 
         model.addAttribute("title", "Food Day Dates");
-        model.addAttribute("dates", FoodDayData.getAll());
+        model.addAttribute("dates", fooddayDao.findAll());
 
         return "date/index";
     }
@@ -35,9 +41,9 @@ public class FoodDayController {
 
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddDateForm(@ModelAttribute FoodDay newDate) {
+    public String processAddDateForm(@ModelAttribute @Valid Foodday newDate, Errors errors, Model model) {
 
-        FoodDayData.add(newDate);
+        fooddayDao.save(newDate);
 
         return "redirect:";
     }
@@ -46,7 +52,7 @@ public class FoodDayController {
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveDateForm(Model model) {
         model.addAttribute("title", "Remove Date");
-        model.addAttribute("dates", FoodDayData.getAll());
+        model.addAttribute("dates", fooddayDao.findAll());
 
         return "date/remove";
     }
@@ -56,7 +62,7 @@ public class FoodDayController {
     public String processRemoveDateForm(@RequestParam int[] dateIds) {
 
         for (int dateId : dateIds) {
-            FoodDayData.remove(dateId);
+            fooddayDao.delete(dateId);
         }
 
         return "redirect:";

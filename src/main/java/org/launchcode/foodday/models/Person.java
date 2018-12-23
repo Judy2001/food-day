@@ -6,13 +6,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
-//@Entity
+@Entity
 public class Person {
 
-    //@Id
-    //@GeneratedValue
-    private int personId;
-    private int nextId;
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotNull
     @Size(min=2, max=25, message = "Name must be between 2 and 25 characters long")
@@ -32,18 +31,11 @@ public class Person {
     }
 
 
-    public Person() {
-        nextId=10;
-        nextId++;
-    }
+    public Person() { }
 
 
-    public int getNextId() {
-        return nextId;
-    }
-
-    public int getPersonId() {
-        return personId;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -61,8 +53,5 @@ public class Person {
     public void setFood(String food) {
         this.food = food;
     }
-/*
-    public void setFoodDay(FoodDay date) {
-    }*/
 
 }
