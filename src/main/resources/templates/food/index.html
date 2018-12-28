@@ -29,6 +29,7 @@
     <tr th:each="person : ${persons}">
         <td th:text="${person.name}"></td>
         <td th:text="${person.food}"></td>
+        <td><a th:href="@{'/food/edit/' + ${person.id}}">Edit</a></td>
     </tr>
 
 </table>

@@ -53,6 +53,7 @@ public class PersonController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Person");
+            model.addAttribute("dates", fooddayDao.findAll());
             return "food/add";
         }
 
@@ -102,10 +103,10 @@ public class PersonController {
 
         if (errors.hasErrors()) {
 
-            model.addAttribute("title", "Edit Person Information");
+            model.addAttribute("title", "Edit");
             model.addAttribute("person", person);
 
-            return "cheese/edit";
+            return "food/edit";
         }
 
         Person aPerson = personDao.findOne(personId);

@@ -16,7 +16,7 @@ public class Foodday {
     private int id;
 
     @NotNull
-    @Size(min=3, message = "Enter a date")
+    @Size(min=3, message = "Enter a valid date")
     private String date;
 
     //@OneToMany

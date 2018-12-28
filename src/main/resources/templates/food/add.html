@@ -21,13 +21,13 @@
     <div class="form-group">
         <label th:for="name-field">Name</label>
         <input class="form-control" id="person-field" type="text" name="name" />
-        <!--<span th:errors="*{person.name}" class="error"></span>-->
+        <span th:errors="*{name}" class="error"></span>
     </div>
 
     <div class="form-group">
         <label th:for="food-field">Food</label>
         <input class="form-control" id="food-field" type="text" name="food" />
-        <!--<span th:errors="*{person.food}" class="error"></span>-->
+        <span th:errors="*{food}" class="error"></span>
     </div>
 
     <br />
