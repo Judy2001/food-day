@@ -1,6 +1,8 @@
 package org.launchcode.foodday.controllers;
 
+import org.launchcode.foodday.models.Foodday;
 import org.launchcode.foodday.models.Person;
+import org.launchcode.foodday.models.data.FooddayDao;
 import org.launchcode.foodday.models.data.PersonDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class PersonController {
     @Autowired
     private PersonDao personDao;
 
+    @Autowired
+    private FooddayDao fooddayDao;
+
 
     @RequestMapping(value = "")
     public String index(Model model) {
@@ -35,13 +40,16 @@ public class PersonController {
     public String displayAddPersonForm(Model model) {
 
         model.addAttribute("title", "Add Person");
+        model.addAttribute(new Person());
+        model.addAttribute("dates", fooddayDao.findAll());
 
         return "food/add";
     }
 
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddPersonForm(@ModelAttribute @Valid Person newPerson, Errors errors, Model model) {
+    public String processAddPersonForm(@ModelAttribute @Valid Person newPerson, Errors errors,
+                                       @ModelAttribute Foodday dates, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Person");

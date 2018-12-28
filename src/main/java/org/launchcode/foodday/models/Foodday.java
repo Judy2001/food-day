@@ -21,7 +21,7 @@ public class Foodday {
 
     //@OneToMany
     //@JoinColumn(name = "foodday_id")
-    //private ArrayList<Person> persons = new ArrayList<>();
+    private ArrayList<Person> persons = new ArrayList<>();
 
 
     public Foodday(String date) {

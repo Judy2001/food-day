@@ -21,8 +21,8 @@ public class Person {
     @Size(min=3, message = "Bring some food!")
     private String food;
 
-/*    @ManyToOne
-    private FoodDay foodDay;*/
+    //@ManyToOne
+    //private Foodday foodday;
 
 
     public Person(String name, String food) {
