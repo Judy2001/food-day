@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+<h1 th:text="${date.date}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+    <ul th:each="date : ${date.dates}">
+        <li th:text="${date.date}" />
+    </ul>
+
+<p><a th:href="'/food/add/' + ${date.id}">Add Person</a></p>
+
+</body>
+
+</html>

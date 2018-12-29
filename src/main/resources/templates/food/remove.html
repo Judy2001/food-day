@@ -3,11 +3,11 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body class="container body-content">
-    <h1 th:text="${title}">Default Title</h1>
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
 
     <form method="post">
-
         <div th:each="person : ${persons}" class="checkbox">
             <input type="checkbox" name="personIds" th:value="${person.id}" th:id="${person.id}" />
             <label th:for="${person.id}" th:text="${person.name}"></label>
@@ -15,13 +15,12 @@
         </div>
 
         <input type="submit" value="Remove Person" />
-
     </form>
 
-    <br />
-    <br />
+<br />
+<br />
 
-    <nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: navigation"></nav>
 
 </body>
 

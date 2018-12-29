@@ -3,16 +3,16 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body class="container body-content">
+<body class="container">
     <h1 th:text="${title}">Default Title</h1>
 
     <br />
 
-    <form method="post" style="max-width:300px;" th:object="${foodDay}">
+    <form method="post" style="max-width:300px;" th:object="${date}">
         <div class="form-group">
-            <label th:for="date-field">Date</label>
+            <label th:for="date">Date</label>
             <input class="form-control" id="date-field" type="text" name="date" />
-            <!--<span th:errors="*{date}" class="error"></span>-->
+            <span th:errors="*{date}" class="error"></span>
         </div>
         <input type="submit" value="Add Date" />
     </form>
