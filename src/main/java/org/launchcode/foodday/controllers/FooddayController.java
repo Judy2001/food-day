@@ -1,8 +1,11 @@
 package org.launchcode.foodday.controllers;
 
 
+import org.launchcode.foodday.models.AddPerson;
 import org.launchcode.foodday.models.Foodday;
+import org.launchcode.foodday.models.Person;
 import org.launchcode.foodday.models.data.FooddayDao;
+import org.launchcode.foodday.models.data.PersonDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +17,14 @@ import javax.validation.Valid;
 
 
 @Controller
-@RequestMapping("date")
+@RequestMapping(value = "date")
 public class FooddayController {
 
     @Autowired
     private FooddayDao fooddayDao;
+
+    @Autowired
+    private PersonDao personDao;
 
 
     @RequestMapping(value = "")
@@ -35,17 +41,65 @@ public class FooddayController {
     public String displayAddDateForm(Model model) {
 
         model.addAttribute("title", "Add Date");
+        model.addAttribute(new Foodday());
 
         return "date/add";
     }
 
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddDateForm(@ModelAttribute @Valid Foodday newDate, Errors errors, Model model) {
+    public String processAddDateForm(Model model,
+                                     @ModelAttribute @Valid Foodday date, Errors errors) {
 
-        fooddayDao.save(newDate);
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Date");
+            return "date/add";
+        }
 
-        return "redirect:";
+        fooddayDao.save(date);
+
+        return "redirect:view/" + date.getId();
+    }
+
+
+    @RequestMapping(value = "view/{dateId}", method = RequestMethod.GET)
+    public String viewDate(Model model, @PathVariable int dateId) {
+
+        Foodday date = fooddayDao.findOne(dateId);
+        model.addAttribute("date", date);
+
+        return "date/view";
+    }
+
+
+    @RequestMapping(value = "add-person/{dateId}", method = RequestMethod.GET)
+    public String addPerson(Model model, @PathVariable int dateId) {
+
+        Foodday date = fooddayDao.findOne(dateId);
+        AddPerson form = new AddPerson(personDao.findAll(), date);
+
+        model.addAttribute("title", "Add person to " + date.getDate() + " food day.");
+        model.addAttribute("form", form);
+
+        return "date/add-person";
+    }
+
+
+    @RequestMapping(value = "add-person", method = RequestMethod.POST)
+    public String addPerson(Model model,
+                            @ModelAttribute @Valid AddPerson form, Errors errors) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("form", form);
+            return "date/add-person";
+        }
+
+        Person person = personDao.findOne(form.getPersonId());
+        Foodday date = fooddayDao.findOne(form.getDateId());
+        date.addPerson(person);
+        fooddayDao.save(date);
+
+        return "redirect:/date/view/" + date.getId();
     }
 
 

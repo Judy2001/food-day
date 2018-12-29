@@ -12,10 +12,11 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
-@RequestMapping("food")
+@RequestMapping(value = "food")
 public class PersonController {
 
     @Autowired
@@ -28,8 +29,9 @@ public class PersonController {
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("persons", personDao.findAll());
         model.addAttribute("title", "Food Day!");
+
+        model.addAttribute("persons", personDao.findAll());
         //model.addAttribute("date", FoodDayData.getById(id));
 
         return "food/index";
@@ -48,15 +50,19 @@ public class PersonController {
 
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddPersonForm(@ModelAttribute @Valid Person newPerson, Errors errors,
-                                       @ModelAttribute Foodday dates, Model model) {
-
+    public String processAddPersonForm(@ModelAttribute @Valid Person newPerson,
+                                       Errors errors, @RequestParam int dateId,
+                                       Model model) {
+        //Removed from parameters:  @ModelAttribute Foodday dates
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Person");
             model.addAttribute("dates", fooddayDao.findAll());
+
             return "food/add";
         }
 
+        Foodday fd = fooddayDao.findOne(dateId);
+        newPerson.setDate(fd);
         personDao.save(newPerson);
 
         return "redirect:";
@@ -65,6 +71,7 @@ public class PersonController {
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemovePersonForm(Model model) {
+
         model.addAttribute("title", "Remove Person");
         model.addAttribute("persons", personDao.findAll());
 
@@ -74,8 +81,8 @@ public class PersonController {
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemovePersonForm(@RequestParam int[] personIds) {
-        for (int personId : personIds) {
 
+        for (int personId : personIds) {
             personDao.delete(personId);
         }
 
@@ -91,8 +98,9 @@ public class PersonController {
             return "redirect:";
         }
 
-        model.addAttribute("title", "Edit Person Information");
+        model.addAttribute("title", "Edit Information");
         model.addAttribute("person", aPerson);
+        model.addAttribute("dates", fooddayDao.findAll());
         return "food/edit";
     }
 
@@ -103,7 +111,7 @@ public class PersonController {
 
         if (errors.hasErrors()) {
 
-            model.addAttribute("title", "Edit");
+            model.addAttribute("title", "Edit Information");
             model.addAttribute("person", person);
 
             return "food/edit";
@@ -112,9 +120,23 @@ public class PersonController {
         Person aPerson = personDao.findOne(personId);
         aPerson.setName(person.getName());
         aPerson.setFood(person.getFood());
+        aPerson.setDate(person.getDate());
         personDao.save(aPerson);
 
         return "redirect:";
+    }
+
+
+    @RequestMapping(value = "date", method = RequestMethod.GET)
+    public String date(Model model, @RequestParam int id) {
+
+        Foodday date = fooddayDao.findOne(id);
+        List<Person> persons = date.getPersons();
+
+        model.addAttribute("title", date.getDate() + " Food Day");
+        model.addAttribute("persons", persons);
+
+        return "person/index";
     }
 
 }
