@@ -3,24 +3,24 @@
 
 <head th:replace="fragments :: head"></head>
 
-<body class="container">
-    <h1 th:text="${title}">Default Title</h1>
+<body class="container body-content">
+<h1 th:text="${title}">Default Title</h1>
 
-    <br />
+<br />
 
-    <form method="post" style="max-width:300px;" th:object="${date}">
-        <div class="form-group">
-            <label th:for="date">Date</label>
-            <input class="form-control" id="date-field" type="text" name="date" />
-            <span th:errors="*{date}" class="error"></span>
-        </div>
-        <input type="submit" value="Add Date" />
-    </form>
+<form method="post" style="max-width:300px;" th:object="${foodDay}">
+    <div class="form-group">
+        <label th:for="date-field">Date</label>
+        <input class="form-control" id="date-field" type="text" name="date" />
+        <!--<span th:errors="*{date}" class="error"></span>-->
+    </div>
+    <input type="submit" value="Add Date" />
+</form>
 
-    <br />
-    <br />
+<br />
+<br />
 
-    <nav th:replace="fragments :: navigation"></nav>
+<nav th:replace="fragments :: navigation"></nav>
 
 </body>
 

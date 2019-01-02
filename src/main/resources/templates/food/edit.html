@@ -10,10 +10,6 @@
 
 <br/>
 
-<h1 th:text="${'Edit info for ' + person.name}"></h1>
-
-<br />
-
     <form method="post" style="max-width:600px;" th:object="${person}" action="/person/edit">
         <div class="form-group">
             <label th:for="name">Name</label>

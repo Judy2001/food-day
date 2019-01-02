@@ -4,7 +4,6 @@ package org.launchcode.foodday.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 
 @Entity
@@ -22,10 +21,8 @@ public class Person {
     @Size(min=3, message = "Bring some food!")
     private String food;
 
-    private Foodday date;
-
-    @ManyToMany
-    private List<Foodday> dates;
+/*    @ManyToOne
+    private Foodday foodday;*/
 
 
     public Person(String name, String food) {
@@ -56,11 +53,5 @@ public class Person {
     public void setFood(String food) {
         this.food = food;
     }
-
-    public void setDate(Foodday date) {
-        this.date = date;
-    }
-
-    public Foodday getDate() {return date;}
 
 }
