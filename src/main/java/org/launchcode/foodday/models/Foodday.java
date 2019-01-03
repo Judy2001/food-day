@@ -16,12 +16,11 @@ public class Foodday {
     private int id;
 
     @NotNull
-    @Size(min=3, message = "Enter a date")
+    @Size(min=6, max=10, message = "Please enter a valid date")
     private String date;
 
-/*    @OneToMany
-    @JoinColumn(name = "foodday_id")
-    private ArrayList<Person> persons = new ArrayList<>();*/
+    @ManyToMany
+    private List<Person> persons;
 
 
     public Foodday(String date) {
@@ -32,9 +31,9 @@ public class Foodday {
     public Foodday() { }
 
 
-/*    public List<Person> getPersons() {
-        return persons;
-    }*/
+    public void addPerson(Person person) {
+        persons.add(person);
+    }
 
 
     public int getId() {
@@ -47,6 +46,10 @@ public class Foodday {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public List<Person> getPersons() {
+        return persons;
     }
 
 }

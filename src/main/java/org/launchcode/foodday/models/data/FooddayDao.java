@@ -1,5 +1,6 @@
 package org.launchcode.foodday.models.data;
 
+
 import org.launchcode.foodday.models.Foodday;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

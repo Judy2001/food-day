@@ -8,11 +8,11 @@
 
 <br />
 
-<form method="post" style="max-width:300px;" th:object="${foodDay}">
+<form method="post" style="max-width:300px;" th:object="${foodday}">
     <div class="form-group">
         <label th:for="date-field">Date</label>
-        <input class="form-control" id="date-field" type="text" name="date" />
-        <!--<span th:errors="*{date}" class="error"></span>-->
+        <input class="form-control" th:field="*{date}" />
+        <span th:errors="*{date}" class="error"></span>
     </div>
     <input type="submit" value="Add Date" />
 </form>
