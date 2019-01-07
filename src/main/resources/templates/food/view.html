@@ -11,24 +11,24 @@
 
 <a th:href="'/food/add/' + ${date.id}">Add Person</a> |
 <a th:href="'/food/remove' + ${dateId}">Remove Person</a>
-<br />
 
+<br />
 <br />
 
 <p th:unless="${persons} and ${persons.size()}">No one is bringing food  :(</p>
 
-    <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>Contribution</th>
-        </tr>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Contribution</th>
+    </tr>
 
-        <tr th:each="person : ${persons}">
-            <td th:text="${person.name}"></td>
-            <td th:text="${person.food}"></td>
-            <td><a th:href="@{'/food/edit/' + ${person.id}}">Edit</a></td>
-        </tr>
-    </table>
+    <tr th:each="person : ${persons}">
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.food}"></td>
+        <td><a th:href="@{'/food/edit/' + ${person.id}}">Edit</a></td>
+    </tr>
+</table>
 
 <br />
 

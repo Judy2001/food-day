@@ -21,8 +21,8 @@ public class Person {
     @Size(min=3, message = "Bring some food!")
     private String food;
 
-/*    @ManyToOne
-    private Foodday foodday;*/
+    @ManyToOne
+    private Foodday foodday;
 
 
     public Person(String name, String food) {
@@ -54,4 +54,11 @@ public class Person {
         this.food = food;
     }
 
+    public Foodday getFoodday() {
+        return foodday;
+    }
+
+    public void setFoodday(Foodday foodday) {
+        this.foodday = foodday;
+    }
 }

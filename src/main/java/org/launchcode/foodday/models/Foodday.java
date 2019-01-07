@@ -16,7 +16,7 @@ public class Foodday {
     private int id;
 
     @NotNull
-    @Size(min=6, max=10, message = "Please enter a valid date")
+    @Size(min=6, message = "Please enter a valid date")
     private String date;
 
     @ManyToMany

@@ -3,8 +3,8 @@ package org.launchcode.foodday.controllers;
 
 import org.launchcode.foodday.models.Foodday;
 import org.launchcode.foodday.models.data.FooddayDao;
-
 import org.launchcode.foodday.models.data.PersonDao;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +28,7 @@ public class FooddayController {
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("title", "Food Day Dates");
+        model.addAttribute("title", "Food-Day Dates");
         model.addAttribute("dates", fooddayDao.findAll());
 
         return "date/index";
@@ -46,7 +46,8 @@ public class FooddayController {
 
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddDateForm(@ModelAttribute @Valid Foodday date, Errors errors, Model model) {
+    public String processAddDateForm(@ModelAttribute @Valid Foodday date, Errors errors,
+                                     Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Date");
@@ -55,7 +56,7 @@ public class FooddayController {
 
         fooddayDao.save(date);
 
-        return "redirect:view/" + date.getId();
+        return "redirect:";
     }
 
 
@@ -80,10 +81,12 @@ public class FooddayController {
 
 
     @RequestMapping(value = "view/{dateId}", method = RequestMethod.GET)
-    public String viewDates(Model model, @PathVariable int dateId) {
+    public String viewDate(Model model, @PathVariable int dateId) {
 
         Foodday date = fooddayDao.findOne(dateId);
         model.addAttribute("date", date);
+        model.addAttribute("persons", date.getPersons());
+        model.addAttribute("dateId", date.getId());
 
         return "date/view";
     }

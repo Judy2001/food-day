@@ -1,10 +1,16 @@
-package org.launchcode.foodday.models;
+package org.launchcode.foodday.models.forms;
+
+
+import org.launchcode.foodday.models.Foodday;
+import org.launchcode.foodday.models.Person;
 
 import javax.validation.constraints.NotNull;
 
-public class AddPerson {
 
-    @NotNull int dateId;
+public class AddPersonForm {
+
+    @NotNull
+    private int dateId;
 
     @NotNull
     private int personId;
@@ -14,10 +20,10 @@ public class AddPerson {
     private Foodday date;
 
 
-    public AddPerson() {}
+    public AddPersonForm() {}
 
 
-    public AddPerson(Iterable<Person> persons, Foodday date) {
+    public AddPersonForm(Iterable<Person> persons, Foodday date) {
         this.persons = persons;
         this.date = date;
     }
@@ -27,17 +33,19 @@ public class AddPerson {
         return dateId;
     }
 
-    public void setDateId(int dateId) {
+/*    public void setDateId(int dateId) {
         this.dateId = dateId;
-    }
+    }*/
 
     public int getPersonId() {
         return personId;
     }
 
-    public void setPersond(int personId) {
+/*
+    public void setPersonId(int personId) {
         this.personId = personId;
     }
+*/
 
     public Iterable<Person> getPersons() {
         return persons;
@@ -45,6 +53,10 @@ public class AddPerson {
 
     public Foodday getDate() {
         return date;
+    }
+
+    public void setDate(Foodday date) {
+        this.date = date;
     }
 
 }
