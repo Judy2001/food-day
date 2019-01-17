@@ -4,10 +4,11 @@ package org.launchcode.foodday.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 
 
 @Entity
-public class Person {
+public class User {
 
     @Id
     @GeneratedValue
@@ -18,20 +19,46 @@ public class Person {
     private String name;
 
     @NotNull
-    @Size(min=3, message = "Bring some food!")
+    private String password;
+
     private String food;
 
     @ManyToOne
     private Foodday foodday;
 
+    private static ArrayList<User> users = new ArrayList<>();
 
-    public Person(String name, String food) {
+
+    public User(String name, String password) {
         this.name = name;
-        this.food = food;
+        this.password = password;
     }
 
 
-    public Person() { }
+    public User() { }
+
+
+    public void setAUser(User newUser) {
+    }
+
+
+    public static void add(User newUser) {
+        users.add(newUser);
+    }
+
+
+    public static User getById(int id) {
+
+        User theUser = null;
+
+        for (User candidateUser : users) {
+            if (candidateUser.getId() == id) {
+                theUser = candidateUser;
+            }
+        }
+
+        return theUser;
+    }
 
 
     public int getId() {
@@ -44,6 +71,14 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFood() {
@@ -61,4 +96,5 @@ public class Person {
     public void setFoodday(Foodday foodday) {
         this.foodday = foodday;
     }
+
 }
