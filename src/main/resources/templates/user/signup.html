@@ -5,38 +5,38 @@
 
 <body class="container">
 
-<form method="post" style="max-width:500px;" th:object="${user}">
+    <form method="post" style="max-width:500px;" th:object="${user}">
 
-    <h1 th:text="${title}">Default Title</h1>
+        <h1 th:text="${title}">Default Title</h1>
 
-    <div class="form-group">
-        <label th:for="name">Username:</label>
+        <div class="form-group">
+            <label th:for="name">Username</label>
 
-        <input class="form-control" th:field="*{name}" />
-        <!--<input class="form-control" id="name-field" type="text" name="name" />-->
-        <span th:errors="*{name}" class="error"></span>
-    </div>
+            <input class="form-control" th:field="*{name}" />
+            <!--<input class="form-control" th:value="${name} id="name" type="text" name="name" />-->
+            <span th:errors="*{name}" class="error"></span>
+        </div>
 
-    <div class="form-group">
-        <label th:for="password">Password:</label>
+        <div class="form-group">
+            <label th:for="password">Password</label>
 
-        <input class="form-control" type="password" th:field="*{password}" />
-        <!--<input class="form-control" type="password" id="password-field" name="password" />-->
-        <span th:errors="*{password}" class="error"></span>
-    </div>
+            <input class="form-control" type="password" th:field="*{password}" />
+            <!--<input class="form-control" type="password" id="password" name="password" />-->
+            <span th:errors="*{password}" class="error"></span>
+        </div>
 
-    <div class="form-group">
-        <label th:for="verify">Verify Password:</label>
+        <div class="form-group">
+            <label th:for="verify">Verify Password</label>
 
-        <input class="form-control" type="password" id="verify-field" name="verify" />
+            <input class="form-control" type="password" name="verify" id="verify" />
 
-        <span th:text="${message}">Default Message</span>
-    </div>
+            <span th:text="${message}">Default Message</span>
+        </div>
 
 
-    <input type="submit" value="Sign Up" />
+        <input type="submit" value="Sign Up" />
 
-</form>
+    </form>
 
 </body>
 

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<form method="post" style="max-width:600px;" th:object="{form}" action="/user/logout">
+    <input class="form-control" th:field=*{logout}>
+</form>
+
+</body>
+
+</html>

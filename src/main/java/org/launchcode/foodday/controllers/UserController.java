@@ -1,5 +1,6 @@
 package org.launchcode.foodday.controllers;
 
+
 import org.launchcode.foodday.models.Login;
 import org.launchcode.foodday.models.User;
 import org.launchcode.foodday.models.data.FooddayDao;
@@ -38,11 +39,11 @@ public class UserController {
     public String displaySignupForm(Model model) {
 
         model.addAttribute("title", "Register");
-        //model.addAttribute("id", userDao.findAll());
         model.addAttribute(new User());
 
         return "user/signup";
     }
+
 
     @RequestMapping(value = "signup", method = RequestMethod.POST)
     public String processSignupForm(@ModelAttribute @Valid User user,
@@ -50,17 +51,15 @@ public class UserController {
 
         if (!errors.hasErrors() && user.getPassword().equals(verify)) {
 
-            model.addAttribute("user", user);
+            model.addAttribute("name", user.getName());
             userDao.save(user);
 
             return "redirect:/date";
 
         } else {
 
-            if (!user.getPassword().equals(verify)) {
-                model.addAttribute("message", "Passwords must match");
-                user.setPassword("");
-            }
+            model.addAttribute("message", "Passwords must match");
+            user.setPassword("");
 
             return "user/signup";
 

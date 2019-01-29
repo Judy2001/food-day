@@ -19,9 +19,8 @@ public class User {
     private String name;
 
     @NotNull
+    @Size(min=4, message = "Password must be at least 4 characters long")
     private String password;
-
-    private String food;
 
     @ManyToOne
     private Foodday foodday;
@@ -79,14 +78,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getFood() {
-        return food;
-    }
-
-    public void setFood(String food) {
-        this.food = food;
     }
 
     public Foodday getFoodday() {

@@ -4,7 +4,6 @@ package org.launchcode.foodday.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,7 +19,7 @@ public class Foodday {
     private String date;
 
     @ManyToMany
-    private List<Person> persons;
+    private List<User> users;
 
 
     public Foodday(String date) {
@@ -31,8 +30,8 @@ public class Foodday {
     public Foodday() { }
 
 
-    public void addPerson(Person person) {
-        persons.add(person);
+    public void addPerson(User user, String food) {
+        users.add(user);
     }
 
 
@@ -48,8 +47,8 @@ public class Foodday {
         this.date = date;
     }
 
-    public List<Person> getPersons() {
-        return persons;
+    public List<User> getUsers() {
+        return users;
     }
 
 }
