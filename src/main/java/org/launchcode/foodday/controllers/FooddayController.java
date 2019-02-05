@@ -95,10 +95,10 @@ public class FooddayController {
 
 
     @RequestMapping(value = "add-person/{dateId}", method = RequestMethod.GET)
-    public String displayAddUserForm(Model model, @PathVariable int dateId) {
+    public String displayAddUserForm(Model model, @PathVariable int dateId, @ModelAttribute String food) {
 
         Foodday date = fooddayDao.findOne(dateId);
-        AddUserForm form = new AddUserForm(userDao.findAll(), date);
+        AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
 
         model.addAttribute("title", "Add Person to " + date.getDate());
         model.addAttribute("date", date);
@@ -110,7 +110,7 @@ public class FooddayController {
 
     @RequestMapping(value = "add-person", method = RequestMethod.POST)
     public String ProcessAddUserForm(@ModelAttribute @Valid AddUserForm form, Errors errors,
-                                     Model model) {
+                                     @ModelAttribute String food, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("form", form);
@@ -119,7 +119,6 @@ public class FooddayController {
 
         User user = userDao.findOne(form.getUserId());
         Foodday date = fooddayDao.findOne(form.getDateId());
-        String food = "";
         date.addPerson(user, food);
         fooddayDao.save(date);
 
@@ -150,11 +149,11 @@ public class FooddayController {
 
     @RequestMapping(value = "edit/{personId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int dateId,
-                                  @RequestParam int userId) {
+                                  @RequestParam int userId, @ModelAttribute String food) {
 
         User aUser = userDao.findOne(userId);
         Foodday date = fooddayDao.findOne(dateId);
-        AddUserForm form = new AddUserForm(userDao.findAll(), date);
+        AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
 
         if (aUser == null) {
             return "redirect:view/";
@@ -169,7 +168,7 @@ public class FooddayController {
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     public String processEditForm(Model model, @ModelAttribute @Valid User user,
                                   Errors errors, @RequestParam int userId,
-                                  @PathVariable int dateId) {
+                                  @PathVariable int dateId, @ModelAttribute String food) {
 
         if (errors.hasErrors()) {
 
@@ -182,7 +181,7 @@ public class FooddayController {
         User aUser = userDao.findOne(userId);
         aUser.setName(user.getName());
         Foodday date = fooddayDao.findOne(dateId);
-        AddUserForm form = new AddUserForm(userDao.findAll(), date);
+        AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
         form.setFood(form.getFood());
         userDao.save(aUser);
 

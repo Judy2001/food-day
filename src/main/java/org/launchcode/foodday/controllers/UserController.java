@@ -51,15 +51,17 @@ public class UserController {
 
         if (!errors.hasErrors() && user.getPassword().equals(verify)) {
 
-            model.addAttribute("name", user.getName());
+            model.addAttribute("user", user);
             userDao.save(user);
 
             return "redirect:/date";
 
         } else {
 
-            model.addAttribute("message", "Passwords must match");
-            user.setPassword("");
+            if (!user.getPassword().equals(verify)) {
+                model.addAttribute("message", "Passwords must match");
+                user.setPassword("");
+            }
 
             return "user/signup";
 

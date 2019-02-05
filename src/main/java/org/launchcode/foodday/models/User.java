@@ -37,10 +37,6 @@ public class User {
     public User() { }
 
 
-    public void setAUser(User newUser) {
-    }
-
-
     public static void add(User newUser) {
         users.add(newUser);
     }
