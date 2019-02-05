@@ -1,9 +1,0 @@
-/*
-package org.launchcode.foodday.models.data;
-
-import org.launchcode.foodday.models.FoodDay;
-import org.springframework.data.repository.CrudRepository;
-
-public interface FoodDayDao extends CrudRepository<FoodDay, Integer> {
-}
-*/
