@@ -12,7 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
@@ -73,32 +77,59 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String displayLoginForm(Model model) {
         model.addAttribute("title", "Food Day!");
-        model.addAttribute("id", userDao.findAll());
-        model.addAttribute(new Login());
+        //model.addAttribute("id", userDao.findAll());
+        model.addAttribute(new User());
         return "user/login";
     }
 
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String processLoginForm(@ModelAttribute @Valid Login newLogin, Errors errors,
-                                   Model model) {
+    public String processLoginForm(@ModelAttribute @Valid User user, Errors errors,
+                                   HttpServletResponse response, Model model) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Food Day!");
+        List<User> user = userDao.getName(user.getName);
+
+        if (user.isEmpty()) {
+            model.addAttribute("message", "Invalid Name");
+            model.addAttribute("title", "Login to Food Day!");
             return "user/login";
         }
 
-        User user = newLogin.loginUser();
-        userDao.save(user);
+        User loggedIn = user.get(0);
 
-        return "redirect:/date";
+        if (loggedIn.getPassword().equals(user.getPassword())) {
+            Cookie cookie = new Cookie("user", user.getName());
+            cookie.setPath("/");
+            response.addCookie(cookie);
+
+            return "redirect:/date";
+
+        } else {
+
+            model.addAttribute("message", "Invalid Password");
+            model.addAttribute("title", "Login to Food Day!");
+
+            return "user/login";
+        }
     }
 
 
-/*    @RequestMapping(value= "logout", method = RequestMethod.POST)
-    public String logout() {
-        session.removeAttribute("username");
-        session.invalidate();
-    }*/
+    @RequestMapping(value = "logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+
+            for (Cookie cookie : cookies) {
+                cookie.setMaxAge(0);
+                cookie.setPath("/");
+                response.addCookie(cookie);
+            }
+
+        }
+
+        return "user/login";
+    }
 
 }

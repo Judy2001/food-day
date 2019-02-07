@@ -19,6 +19,7 @@ public class Foodday {
     private String date;
 
     @ManyToMany
+    @JoinColumn(name = "food_day_id")
     private List<User> users;
 
 
