@@ -84,4 +84,7 @@ public class User {
         this.foodday = foodday;
     }
 
+    public User get(int i) {
+        return User.getById((i));
+    }
 }

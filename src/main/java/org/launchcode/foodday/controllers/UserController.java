@@ -1,7 +1,6 @@
 package org.launchcode.foodday.controllers;
 
 
-import org.launchcode.foodday.models.Login;
 import org.launchcode.foodday.models.User;
 import org.launchcode.foodday.models.data.FooddayDao;
 import org.launchcode.foodday.models.data.UserDao;
@@ -16,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -68,17 +68,16 @@ public class UserController {
             }
 
             return "user/signup";
-
         }
-
     }
 
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String displayLoginForm(Model model) {
+
         model.addAttribute("title", "Food Day!");
-        //model.addAttribute("id", userDao.findAll());
         model.addAttribute(new User());
+
         return "user/login";
     }
 
@@ -87,22 +86,25 @@ public class UserController {
     public String processLoginForm(@ModelAttribute @Valid User user, Errors errors,
                                    HttpServletResponse response, Model model) {
 
-        List<User> user = userDao.getName(user.getName);
+        ArrayList<User> u = userDao.findByName(user.getName());
 
-        if (user.isEmpty()) {
+        if (u.isEmpty()) {
+
             model.addAttribute("message", "Invalid Name");
-            model.addAttribute("title", "Login to Food Day!");
+            model.addAttribute("title", "Login for Food Day!");
+
             return "user/login";
         }
 
-        User loggedIn = user.get(0);
+        User loggedIn = user.getById(user.getId());
 
         if (loggedIn.getPassword().equals(user.getPassword())) {
-            Cookie cookie = new Cookie("user", user.getName());
-            cookie.setPath("/");
-            response.addCookie(cookie);
 
-            return "redirect:/date";
+            Cookie c = new Cookie("user", user.getName());
+            c.setPath("/");
+            response.addCookie(c);
+
+            return "redirect:/date/index";
 
         } else {
 
@@ -121,12 +123,11 @@ public class UserController {
 
         if (cookies != null) {
 
-            for (Cookie cookie : cookies) {
-                cookie.setMaxAge(0);
-                cookie.setPath("/");
-                response.addCookie(cookie);
+            for (Cookie c : cookies) {
+                c.setMaxAge(0);
+                c.setPath("/");
+                response.addCookie(c);
             }
-
         }
 
         return "user/login";
