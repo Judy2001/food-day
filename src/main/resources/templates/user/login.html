@@ -11,20 +11,20 @@
 
         <div class="form-group">
             <label th:for="username">Username:</label>
-            <!--<input class="form-control" th:value="${name}" id="name" type="text" name="name" />-->
+            <input class="form-control" th:value="${name}" id="name" type="text" name="name" />
 
-            <input class="form-control" th:field="*{name}" />
+            <!--<input class="form-control" th:field="*{name}" />
 
-            <span th:errors="*{name}" class="error"></span>
+            <span th:errors="*{name}" class="error"></span>-->
         </div>
 
         <div class="form-group">
             <label th:for="password">Password:</label>
-            <!--<input class="form-control" type="password" id="password" name="password" />-->
+            <input class="form-control" type="password" id="password" name="password" />
 
-            <input class="form-control" type="password" th:field="*{password}" />
+            <!--<input class="form-control" type="password" th:field="*{password}" />
 
-            <span th:errors="*{password}" class="error"></span>
+            <span th:errors="*{password}" class="error"></span>-->
         </div>
 
         <input type="submit" value="Login" />

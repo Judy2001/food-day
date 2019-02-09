@@ -44,15 +44,15 @@ public class User {
 
     public static User getById(int id) {
 
-        User theUser = null;
+        User user = null;
 
         for (User candidateUser : users) {
             if (candidateUser.getId() == id) {
-                theUser = candidateUser;
+                user = candidateUser;
             }
         }
 
-        return theUser;
+        return user;
     }
 
 
@@ -84,7 +84,7 @@ public class User {
         this.foodday = foodday;
     }
 
-    public User get(int i) {
+/*    public User get(int i) {
         return User.getById((i));
-    }
+    }*/
 }

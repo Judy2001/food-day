@@ -15,7 +15,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -86,29 +85,31 @@ public class UserController {
     public String processLoginForm(@ModelAttribute @Valid User user, Errors errors,
                                    HttpServletResponse response, Model model) {
 
-        ArrayList<User> u = userDao.findByName(user.getName());
+        List<User> u = userDao.findByName(user.getName());
 
         if (u.isEmpty()) {
 
-            model.addAttribute("message", "Invalid Name");
+            model.addAttribute("message", "Invalid name");
             model.addAttribute("title", "Login for Food Day!");
 
             return "user/login";
         }
 
-        User loggedIn = user.getById(user.getId());
+        User loggedIn = u.get(0);
 
-        if (loggedIn.getPassword().equals(user.getPassword())) {
+        if (!errors.hasErrors() && loggedIn.getPassword().equals(user.getPassword())) {
 
+            //model.addAttribute("user", user);
             Cookie c = new Cookie("user", user.getName());
             c.setPath("/");
+            c.setMaxAge(3600);
             response.addCookie(c);
 
-            return "redirect:/date/index";
+            return "redirect:/date";
 
         } else {
 
-            model.addAttribute("message", "Invalid Password");
+            model.addAttribute("message", "Invalid password");
             model.addAttribute("title", "Login to Food Day!");
 
             return "user/login";
@@ -117,12 +118,11 @@ public class UserController {
 
 
     @RequestMapping(value = "logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
+    public String logout(Model model, HttpServletRequest request, HttpServletResponse response) {
 
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
-
             for (Cookie c : cookies) {
                 c.setMaxAge(0);
                 c.setPath("/");
@@ -130,7 +130,9 @@ public class UserController {
             }
         }
 
-        return "user/login";
+        model.addAttribute("title", "Food Day!");
+
+        return "user/index";
     }
 
 }
