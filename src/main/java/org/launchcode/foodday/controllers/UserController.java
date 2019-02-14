@@ -99,7 +99,6 @@ public class UserController {
 
         if (!errors.hasErrors() && loggedIn.getPassword().equals(user.getPassword())) {
 
-            //model.addAttribute("user", user);
             Cookie c = new Cookie("user", user.getName());
             c.setPath("/");
             c.setMaxAge(3600);
@@ -118,7 +117,8 @@ public class UserController {
 
 
     @RequestMapping(value = "logout")
-    public String logout(Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String logout(HttpServletRequest request, HttpServletResponse response,
+                         Model model) {
 
         Cookie[] cookies = request.getCookies();
 
@@ -129,6 +129,11 @@ public class UserController {
                 response.addCookie(c);
             }
         }
+
+        //session.setAttribute("userId", null);
+        response.setHeader("refererUrl", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setHeader("Expires", null);
 
         model.addAttribute("title", "Food Day!");
 
