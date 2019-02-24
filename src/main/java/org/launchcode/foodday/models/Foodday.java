@@ -15,17 +15,16 @@ public class Foodday {
     private int id;
 
     @NotNull
-    @Size(min=6, message = "Please enter a valid date")
+    @Size(min=6, message = "Please enter a date")
     private String date;
 
     @ManyToMany
-    @JoinColumn(name = "food_day_id")
     private List<User> users;
 
 
-    public Foodday(String date) {
+/*    public Foodday(String date) {
         this.date = date;
-    }
+    }*/
 
 
     public Foodday() { }

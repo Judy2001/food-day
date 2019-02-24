@@ -12,7 +12,7 @@ public class Login extends User {
     private String name;
 
     @NotNull
-    @Size(min=3, max=20, message = "Password must be 3-20 characters long")
+    @Size(min=3, max=20, message = "Invalid password")
     private String password;
 
     private int id;

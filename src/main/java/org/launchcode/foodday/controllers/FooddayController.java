@@ -14,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
@@ -87,7 +88,7 @@ public class FooddayController {
 
         Foodday date = fooddayDao.findOne(dateId);
         model.addAttribute("date", date);
-        model.addAttribute("persons", date.getUsers());
+        model.addAttribute("users", date.getUsers());
         model.addAttribute("dateId", date.getId());
 
         return "date/view";
@@ -95,7 +96,8 @@ public class FooddayController {
 
 
     @RequestMapping(value = "add-person/{dateId}", method = RequestMethod.GET)
-    public String displayAddUserForm(Model model, @PathVariable int dateId, @ModelAttribute String food) {
+    public String displayAddUserForm(Model model, @PathVariable int dateId,
+                                     @ModelAttribute String food) {
 
         Foodday date = fooddayDao.findOne(dateId);
         AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
@@ -109,11 +111,13 @@ public class FooddayController {
 
 
     @RequestMapping(value = "add-person", method = RequestMethod.POST)
-    public String ProcessAddUserForm(@ModelAttribute @Valid AddUserForm form, Errors errors,
+    public String processAddUserForm(@ModelAttribute @Valid AddUserForm form, Errors errors,
                                      @ModelAttribute String food, Model model) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Person");
             model.addAttribute("form", form);
+
             return "date/add-person";
         }
 
@@ -126,7 +130,8 @@ public class FooddayController {
     }
 
 
-    @RequestMapping(value = "remove-person/{personId}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "remove-person/{dateId}", method = RequestMethod.GET)
     public String displayRemovePersonForm(Model model) {
         model.addAttribute("title", "Remove Person");
         model.addAttribute("persons", userDao.findAll());

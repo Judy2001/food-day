@@ -68,8 +68,8 @@ public class AddUserForm {
         return date;
     }
 
-    public void setDate(Foodday date) {
+/*    public void setDate(Foodday date) {
         this.date = date;
-    }
+    }*/
 
 }

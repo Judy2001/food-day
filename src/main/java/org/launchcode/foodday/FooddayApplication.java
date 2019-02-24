@@ -1,3 +1,4 @@
+
 package org.launchcode.foodday;
 
 import org.springframework.boot.SpringApplication;
@@ -9,4 +10,5 @@ public class FooddayApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FooddayApplication.class, args);
 	}
+
 }

@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -19,13 +20,11 @@ public class User {
     private String name;
 
     @NotNull
-    @Size(min=4, message = "Password must be at least 4 characters long")
+    @Size(min=4, message = "Invalid password")
     private String password;
 
-    @ManyToOne
-    private Foodday foodday;
-
-    private static ArrayList<User> users = new ArrayList<>();
+    @ManyToMany(mappedBy = "users")
+    private List<Foodday> dates;
 
 
     public User(String name, String password) {
@@ -35,6 +34,9 @@ public class User {
 
 
     public User() { }
+
+
+    private static ArrayList<User> users = new ArrayList<>();
 
 
     public static void add(User newUser) {
@@ -76,15 +78,8 @@ public class User {
         this.password = password;
     }
 
-    public Foodday getFoodday() {
-        return foodday;
+    public List<Foodday> getDates() {
+        return dates;
     }
 
-    public void setFoodday(Foodday foodday) {
-        this.foodday = foodday;
-    }
-
-/*    public User get(int i) {
-        return User.getById((i));
-    }*/
 }
