@@ -11,25 +11,19 @@
 
         <div class="form-group">
             <label th:for="name">Username</label>
-
             <input class="form-control" th:field="*{name}" />
-            <!--<input class="form-control" th:value="${name} id="name" type="text" name="name" />-->
             <span th:errors="*{name}" class="error"></span>
         </div>
 
         <div class="form-group">
             <label th:for="password">Password</label>
-
             <input class="form-control" type="password" th:field="*{password}" />
-            <!--<input class="form-control" type="password" id="password" name="password" />-->
             <span th:errors="*{password}" class="error"></span>
         </div>
 
         <div class="form-group">
             <label th:for="verify">Verify Password</label>
-
             <input class="form-control" type="password" name="verify" id="verify" />
-
             <span th:text="${message}">Default Message</span>
         </div>
 
