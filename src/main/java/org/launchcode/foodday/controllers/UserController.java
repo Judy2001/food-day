@@ -49,11 +49,12 @@ public class UserController {
 
 
     @RequestMapping(value = "signup", method = RequestMethod.POST)
-    public String processSignupForm(@ModelAttribute @Valid User user,
-                                    Errors errors, String verify, Model model) {
+    public String processSignupForm(@ModelAttribute @Valid User user, Errors errors,
+                                    String verify, Model model) {
 
-        if (!errors.hasErrors() && user.getPassword().equals(verify)) {
+        List<User> nameExists = userDao.findByName(user.getName());
 
+        if (!errors.hasErrors() && user.getPassword().equals(verify) && nameExists.isEmpty()) {
             model.addAttribute("user", user);
             userDao.save(user);
 
@@ -61,9 +62,16 @@ public class UserController {
 
         } else {
 
+            model.addAttribute("title", "Register");
+            model.addAttribute("user", user);
+
             if (!user.getPassword().equals(verify)) {
                 model.addAttribute("message", "Passwords must match");
                 user.setPassword("");
+            }
+
+            if(!nameExists.isEmpty()) {
+                model.addAttribute("message", "Username is taken; please select another username");
             }
 
             return "user/signup";
