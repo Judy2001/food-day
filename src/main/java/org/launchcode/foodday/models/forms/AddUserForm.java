@@ -16,23 +16,22 @@ public class AddUserForm {
     @NotNull
     private int userId;
 
+    private Foodday date;
+
     private Iterable<User> users;
 
     @Size(min=3, message = "Bring some food!")
     private String food;
-
-    private Foodday date;
-
 
 
     public AddUserForm() {
     }
 
 
-    public AddUserForm(Iterable<User> users, String food, Foodday date) {
+    public AddUserForm(Foodday date, Iterable<User> users, String food) {
+        this.date = date;
         this.users = users;
         this.food = food;
-        this.date = date;
     }
 
 
@@ -40,17 +39,25 @@ public class AddUserForm {
         return dateId;
     }
 
-/*    public void setDateId(int dateId) {
+    public void setDateId(int dateId) {
         this.dateId = dateId;
-    }*/
+    }
 
     public int getUserId() {
         return userId;
     }
 
-/*    public void setUserId(int personId) {
+    public void setUserId(int personId) {
         this.userId = userId;
-    }*/
+    }
+
+    public Foodday getDate() {
+        return date;
+    }
+
+    public void setDate(Foodday date) {
+        this.date = date;
+    }
 
     public Iterable<User> getUsers() {
         return users;
@@ -63,13 +70,5 @@ public class AddUserForm {
     public void setFood(String food) {
         this.food = food;
     }
-
-    public Foodday getDate() {
-        return date;
-    }
-
-/*    public void setDate(Foodday date) {
-        this.date = date;
-    }*/
 
 }

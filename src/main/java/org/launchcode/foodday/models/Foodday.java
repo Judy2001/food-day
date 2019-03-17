@@ -22,12 +22,12 @@ public class Foodday {
     private List<User> users;
 
 
+    public Foodday() { }
+
+
 /*    public Foodday(String date) {
         this.date = date;
     }*/
-
-
-    public Foodday() { }
 
 
     public void addPerson(User user, String food) {

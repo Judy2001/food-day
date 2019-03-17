@@ -71,7 +71,7 @@ public class UserController {
             }
 
             if(!nameExists.isEmpty()) {
-                model.addAttribute("message", "Username is taken; please select another username");
+                model.addAttribute("message", "That username is taken; please select another username");
             }
 
             return "user/signup";
@@ -92,7 +92,6 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String processLoginForm(@ModelAttribute @Valid User user, Errors errors,
                                    HttpServletResponse response, Model model) {
-
         List<User> u = userDao.findByName(user.getName());
 
         if (u.isEmpty()) {
@@ -137,11 +136,6 @@ public class UserController {
                 response.addCookie(c);
             }
         }
-
-        //session.setAttribute("userId", null);
-        response.setHeader("refererUrl", "no-cache");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setHeader("Expires", null);
 
         model.addAttribute("title", "Food Day!");
 

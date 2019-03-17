@@ -59,7 +59,7 @@ public class FooddayController {
 
         fooddayDao.save(date);
 
-        return "redirect:";
+        return "redirect:view/" + date.getId();
     }
 
 
@@ -100,7 +100,7 @@ public class FooddayController {
                                      @ModelAttribute String food) {
 
         Foodday date = fooddayDao.findOne(dateId);
-        AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
+        AddUserForm form = new AddUserForm(date, userDao.findAll(), food);
 
         model.addAttribute("title", "Add Person to " + date.getDate());
         model.addAttribute("date", date);
@@ -116,17 +116,18 @@ public class FooddayController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Person");
+            //model.addAttribute("users", userDao.findAll());
             model.addAttribute("form", form);
 
             return "date/add-person";
         }
 
-        User user = userDao.findOne(form.getUserId());
-        Foodday date = fooddayDao.findOne(form.getDateId());
-        date.addPerson(user, food);
-        fooddayDao.save(date);
+        User aUser = userDao.findOne(form.getUserId());
+        Foodday aDate = fooddayDao.findOne(form.getDateId());
+        aDate.addPerson(aUser, food);
+        fooddayDao.save(aDate);
 
-        return "redirect:/date/view/" + date.getId();
+        return "redirect:/date/view/" + aDate.getId();
     }
 
 
@@ -158,7 +159,7 @@ public class FooddayController {
 
         User aUser = userDao.findOne(userId);
         Foodday date = fooddayDao.findOne(dateId);
-        AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
+        AddUserForm form = new AddUserForm(date, userDao.findAll(), food);
 
         if (aUser == null) {
             return "redirect:view/";
@@ -186,7 +187,7 @@ public class FooddayController {
         User aUser = userDao.findOne(userId);
         aUser.setName(user.getName());
         Foodday date = fooddayDao.findOne(dateId);
-        AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
+        AddUserForm form = new AddUserForm(date, userDao.findAll(), food);
         form.setFood(form.getFood());
         userDao.save(aUser);
 

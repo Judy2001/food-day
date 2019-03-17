@@ -1,15 +1,32 @@
+a {
+  color: Blue;
+  }
+
 body {
-    font-family: sans-serif;
-    background-color: #ffffcc;
-    background-position: center;
-    text-align: center;
-}
+  font-family: sans-serif;
+  background-color: #ffffcc;
+  background-position: center;
+  text-align: center;
+  }
 
 form {
-    margin: 0 auto;
-    width:250px;
-    }
+  margin: 0 auto;
+  width:250px;
+  }
 
 span {
-    color: red;
-    }
+  color: red;
+  }
+
+h3 {
+  color: MediumBlue;
+  }
+
+.title {
+  color: BlueViolet;
+  font-size: 65px;
+  }
+
+.font-large {
+  font-size: 200px;
+  }
