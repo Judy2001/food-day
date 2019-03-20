@@ -4,25 +4,25 @@
 <head th:replace="fragments :: head"></head>
 
 <body class="container">
-    <h1 class="title" th:text="${title}">Default Title</h1>
+  <h1 class="title" th:text="${title}">Default Title</h1>
 
-    <br />
+  <br />
 
-    <h3 th:unless="${dates} and ${dates.size()}">There are no dates for food days :(</h3>
+  <h3 th:unless="${dates} and ${dates.size()}">There are no dates for food days &nbsp; :(</h3>
 
-    <br />
+  <br />
 
-    <tr th:each="date : ${dates}">
-        <td><a th:href="'/date/view/' + ${date.id}" th:text="${date.date}"></a></td>
-        <br />
-        <br />
-    </tr>
-
+  <tr th:each="date : ${dates}">
+    <td><a th:href="'/date/view/' + ${date.id}" th:text="${date.date}"></a></td>
     <br />
     <br />
+  </tr>
 
-    <a href="/date/add">Add Date</a> |
-    <a href="/date/remove">Remove Date</a>
+  <br />
+  <br />
+
+  <a href="/date/add">Add Date</a> |
+  <a href="/date/remove">Remove Date</a>
 
 </body>
 

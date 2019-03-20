@@ -122,6 +122,8 @@ public class FooddayController {
             return "date/add-person";
         }
 
+        //Foodday date = fooddayDao.findOne(id);
+        //List<User> users = date.getUsers();
         User aUser = userDao.findOne(form.getUserId());
         Foodday aDate = fooddayDao.findOne(form.getDateId());
         aDate.addPerson(aUser, food);
@@ -129,7 +131,6 @@ public class FooddayController {
 
         return "redirect:/date/view/" + aDate.getId();
     }
-
 
 
     @RequestMapping(value = "remove-person/{dateId}", method = RequestMethod.GET)

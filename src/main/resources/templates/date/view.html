@@ -14,22 +14,22 @@
 
 <br />
 
-<h3 th:unless="${persons} and ${persons.size()}">No one is bringing food :(</h3>
+<h3 th:unless="${persons} and ${persons.size()}">No one is bringing food &nbsp; :(</h3>
 <br />
 <br />
 
-    <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>Contribution</th>
-        </tr>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Contribution</th>
+    </tr>
 
-        <tr th:each="person : ${persons}">
-            <td th:text="${person.name}"></td>
-            <td th:text="${person.food}"></td>
-            <td><a th:href="@{'/food/edit/' + ${person.id}}">Edit</a></td>
-        </tr>
-    </table>
+    <tr th:each="person : ${persons}">
+      <td th:text="${person.name}"></td>
+      <td th:text="${person.food}"></td>
+      <td><a th:href="@{'/food/edit/' + ${person.id}}">Edit</a></td>
+    </tr>
+  </table>
 
 <br />
 

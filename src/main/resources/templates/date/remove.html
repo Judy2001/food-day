@@ -6,24 +6,24 @@
 <body class="container body-content">
 <h1 class="title" th:text="${title}">Default Title</h1>
 
-    <br />
+  <br />
 
-    <form method="post">
+  <form method="post">
 
-        <div th:each="date : ${dates}" class="checkbox">
-            <input type="checkbox" name="dateIds" th:value="${date.id}" th:id="${date.id}" />
-            <label th:for="${date.id}" th:text="*{date.date}"></label>
-            <br />
-        </div>
+    <div th:each="date : ${dates}" class="checkbox">
+      <input type="checkbox" name="dateIds" th:value="${date.id}" th:id="${date.id}" />
+      <label th:for="${date.id}" th:text="*{date.date}"></label>
+      <br />
+    </div>
 
-        <input type="submit" value="Remove Date" />
+    <input type="submit" value="Remove Date" />
 
-    </form>
+  </form>
 
-    <br />
-    <br />
+  <br />
+  <br />
 
-    <nav th:replace="fragments :: navigation"></nav>
+  <nav th:replace="fragments :: navigation"></nav>
 
 </body>
 

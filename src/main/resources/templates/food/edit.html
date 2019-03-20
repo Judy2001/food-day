@@ -10,22 +10,22 @@
 
 <br/>
 
-    <form method="post" style="max-width:600px;" th:object="${user}" action="/person/edit">
-        <div class="form-group">
-            <label th:for="name">Name</label>
-            <input class="form-control" th:field="*{name}" th:value="${person.name}" />
-            <span th:errors="*{name}" class="error"></span>
-        </div>
+  <form method="post" style="max-width:600px;" th:object="${user}" action="/person/edit">
+    <div class="form-group">
+      <label th:for="name">Name</label>
+      <input class="form-control" th:field="*{name}" th:value="${person.name}" />
+      <span th:errors="*{name}" class="error"></span>
+    </div>
 
-        <div class="form-group">
-            <label th:for="food">Food</label>
-            <input class="form-control" th:field="*{food}" th:value="${person.food}" />
-            <span th:errors="*{food}" class="error"></span>
-        </div>
+    <div class="form-group">
+      <label th:for="food">Food</label>
+      <input class="form-control" th:field="*{food}" th:value="${person.food}" />
+      <span th:errors="*{food}" class="error"></span>
+    </div>
 
-        <input type="hidden" th:value="${person.id}" name="personId" />
-        <input type="submit" value="Submit Edit" />
-    </form>
+    <input type="hidden" th:value="${person.id}" name="personId" />
+    <input type="submit" value="Submit Edit" />
+  </form>
 
 </body>
 

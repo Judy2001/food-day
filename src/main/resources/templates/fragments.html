@@ -2,28 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
 <head th:fragment="head">
+  <title th:text="${title}">Food Day</title>
+  <br />
+  <br />
 
-    <title th:text="${title}">Food Day</title>
-    <br />
-    <br />
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="../../css/styles.css" th:href="@{/css/styles.css}" />
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" media="all" href="../../css/styles.css" th:href="@{/css/styles.css}" />
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 
-    <nav th:fragment="navigation">
-        <a href="/date">All Food Days</a> |
-        <a href="/date/add">Add Date</a> |
-        <a href="/date/remove">Remove Date</a> |
-        <a href="#" th:href="@{/user/logout}">Logout</a>
+  <nav th:fragment="navigation">
+    <a href="/date">All Food Days</a> |
+    <a href="/date/add">Add Date</a> |
+    <a href="/date/remove">Remove Date</a> |
+    <a href="#" th:href="@{/user/logout}">Logout</a>
 
-        <br />
-    </nav>
+    <br />
+
+  </nav>
 
 </body>
 
