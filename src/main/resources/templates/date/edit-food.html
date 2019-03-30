@@ -10,20 +10,20 @@
 
 <br/>
 
-  <form method="post" style="max-width:600px;" th:object="${user}" action="/person/edit">
+  <form method="post" style="max-width:600px;" th:object="${user}" action="/food/edit">
     <div class="form-group">
       <label th:for="name">Name</label>
-      <input class="form-control" th:field="*{name}" th:value="${person.name}" />
+      <input class="form-control" th:field="*{name}" th:value="${user.name}" />
       <span th:errors="*{name}" class="error"></span>
     </div>
 
     <div class="form-group">
       <label th:for="food">Food</label>
-      <input class="form-control" th:field="*{food}" th:value="${person.food}" />
+      <input class="form-control" th:field="*{food}" th:value="${user.food}" />
       <span th:errors="*{food}" class="error"></span>
     </div>
 
-    <input type="hidden" th:value="${person.id}" name="personId" />
+    <input type="hidden" th:value="${user.id}" name="userId" />
     <input type="submit" value="Submit Edit" />
   </form>
 

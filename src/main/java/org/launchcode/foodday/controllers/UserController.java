@@ -15,6 +15,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
 import java.util.List;
 
 
@@ -41,7 +42,7 @@ public class UserController {
     @RequestMapping(value = "signup", method = RequestMethod.GET)
     public String displaySignupForm(Model model) {
 
-        model.addAttribute("title", "Register");
+        model.addAttribute("title", "Sign Up");
         model.addAttribute(new User());
 
         return "user/signup";
@@ -62,7 +63,7 @@ public class UserController {
 
         } else {
 
-            model.addAttribute("title", "Register");
+            model.addAttribute("title", "Sign Up");
             model.addAttribute("user", user);
 
             if (!user.getPassword().equals(verify)) {
@@ -92,12 +93,13 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String processLoginForm(@ModelAttribute @Valid User user, Errors errors,
                                    HttpServletResponse response, Model model) {
+
         List<User> u = userDao.findByName(user.getName());
 
         if (u.isEmpty()) {
 
             model.addAttribute("message", "Invalid name");
-            model.addAttribute("title", "Login for Food Day!");
+            model.addAttribute("title", "Login to Food Day!");
 
             return "user/login";
         }

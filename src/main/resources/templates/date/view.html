@@ -8,7 +8,7 @@
 
 <br />
 
-<a th:href="'/date/add-person/' + ${date.id}">Add Person</a> |
+<a th:href="'/food/add/' + ${date.id}">Add Person</a> |
 <a th:href="'/food/remove' + ${dateId}">Remove Person</a>
 <br />
 
@@ -24,10 +24,10 @@
       <th>Contribution</th>
     </tr>
 
-    <tr th:each="person : ${persons}">
-      <td th:text="${person.name}"></td>
-      <td th:text="${person.food}"></td>
-      <td><a th:href="@{'/food/edit/' + ${person.id}}">Edit</a></td>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.name}"></td>
+      <td th:text="${user.food}"></td>
+      <td><a th:href="@{'/date/edit-food/' + ${person.id}}">Edit</a></td>
     </tr>
   </table>
 

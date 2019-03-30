@@ -16,7 +16,7 @@ public class User {
     private int id;
 
     @NotNull
-    @Size(min=2, max=25, message = "Name must be between 2 and 25 characters long")
+    @Size(min=2, max=30, message = "Name must be between 2 and 25 characters long")
     private String name;
 
     @NotNull
@@ -40,7 +40,7 @@ public class User {
     }
 
 
-    private static ArrayList<User> users = new ArrayList<>();
+    public static ArrayList<User> users = new ArrayList<>();
 
 
     public static void add(User newUser) {
