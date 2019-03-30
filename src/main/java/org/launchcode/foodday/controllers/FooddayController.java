@@ -122,12 +122,12 @@ public class FooddayController {
         //List<User> users = date.getUsers();
         AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
 
-        model.addAttribute("title", "Add Person to " + date.getDate());
+        model.addAttribute("title", "Add Food to " + date.getDate());
         //model.addAttribute("date", date);
         //model.addAttribute("users", users);
         model.addAttribute("form", form);
 
-        return "date/add-person";
+        return "date/add-food";
     }
 
 
@@ -147,7 +147,7 @@ public class FooddayController {
             //model.addAttribute("users", date.getUsers());
             model.addAttribute("form", form);
 
-            return "date/add-person";
+            return "date/add-food";
         }
 
         //Foodday date = fooddayDao.findOne(id);
@@ -165,7 +165,7 @@ public class FooddayController {
         model.addAttribute("title", "Remove Person");
         model.addAttribute("persons", userDao.findAll());
 
-        return "food/remove";
+        return "date/remove-food";
     }
 
 
@@ -200,7 +200,7 @@ public class FooddayController {
 
         model.addAttribute("title", "Edit Information");
         model.addAttribute("user.name", aUser);
-        return "food/edit";
+        return "date/edit-food";
     }
 
 
@@ -219,7 +219,7 @@ public class FooddayController {
             model.addAttribute("title", "Edit Information");
             model.addAttribute("user.name", user);
 
-            return "food/edit";
+            return "date/edit-food";
         }
 
         User aUser = userDao.findOne(userId);

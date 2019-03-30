@@ -22,7 +22,7 @@ public class Foodday {
     @ManyToMany
     private List<User> users;
 
-    //private String food;
+    private String food;
 
 
     public Foodday() { }
@@ -54,11 +54,12 @@ public class Foodday {
         return users;
     }
 
-/*    public String getFood() {
+    public String getFood() {
         return food;
     }
 
     public void setFood(String food) {
         this.food = this.food;
-    }*/
+    }
+
 }
