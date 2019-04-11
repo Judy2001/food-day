@@ -72,7 +72,8 @@ public class UserController {
             }
 
             if(!nameExists.isEmpty()) {
-                model.addAttribute("message", "That username is taken; please select another username");
+                model.addAttribute("message", "Username is taken; please select another username");
+                user.setName("");
             }
 
             return "user/signup";

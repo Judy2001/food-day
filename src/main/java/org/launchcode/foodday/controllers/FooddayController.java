@@ -29,13 +29,13 @@ public class FooddayController {
 
 
     @RequestMapping(value = "")
-    public String index(Model model, @CookieValue(value="user", defaultValue = "none") String name) {
+    public String index(Model model,
+                        @CookieValue(value="user", defaultValue = "none") String name) {
 
         if(name.equals("none")) {
             return "redirect:/user";
         }
 
-        //User u = userDao.findByName(name).get(0);
         model.addAttribute("title", "Food Days");
         model.addAttribute("dates", fooddayDao.findAll());
 
@@ -44,7 +44,12 @@ public class FooddayController {
 
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddDateForm(Model model) {
+    public String displayAddDateForm(Model model,
+                                     @CookieValue(value="user", defaultValue = "none") String name) {
+
+        if(name.equals("none")) {
+            return "redirect:/user";
+        }
 
         model.addAttribute("title", "Add Date");
         model.addAttribute(new Foodday());
@@ -55,11 +60,7 @@ public class FooddayController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddDateForm(@ModelAttribute @Valid Foodday date, Errors errors,
-                                     Model model, @CookieValue(value="user", defaultValue = "none") String name) {
-
-        if(name.equals("none")) {
-            return "redirect:/user";
-        }
+                                     Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Date");
@@ -68,12 +69,18 @@ public class FooddayController {
 
         fooddayDao.save(date);
 
-        return "redirect:view/" + date.getId();
+        return "redirect:";
     }
 
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveDateForm(Model model) {
+    public String displayRemoveDateForm(Model model,
+                                        @CookieValue(value="user", defaultValue = "none") String name) {
+
+        if(name.equals("none")) {
+            return "redirect:/user";
+        }
+
         model.addAttribute("title", "Remove Date");
         model.addAttribute("dates", fooddayDao.findAll());
 
@@ -82,12 +89,7 @@ public class FooddayController {
 
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveDateForm(@RequestParam int[] dateIds,
-                                        @CookieValue(value="user", defaultValue = "none") String name) {
-
-        if(name.equals("none")) {
-            return "redirect:/user";
-        }
+    public String processRemoveDateForm(@RequestParam int[] dateIds) {
 
         for (int dateId : dateIds) {
             fooddayDao.delete(dateId);
@@ -101,10 +103,6 @@ public class FooddayController {
     public String viewDate(Model model, @PathVariable int dateId,
                            @CookieValue(value="user", defaultValue = "none") String name) {
 
-        if(name.equals("none")) {
-            return "redirect:/user";
-        }
-
         Foodday date = fooddayDao.findOne(dateId);
         model.addAttribute("date", date);
         model.addAttribute("users", date.getUsers());
@@ -116,15 +114,18 @@ public class FooddayController {
 
     @RequestMapping(value = "add-food/{dateId}", method = RequestMethod.GET)
     public String displayAddUserForm(Model model, @PathVariable int dateId,
-                                     @ModelAttribute String food) {
+                                     @ModelAttribute String food,
+                                     @CookieValue(value="user", defaultValue = "none") String name) {
+
+        if(name.equals("none")) {
+            return "redirect:/user";
+        }
 
         Foodday date = fooddayDao.findOne(dateId);
-        //List<User> users = date.getUsers();
         AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
 
-        model.addAttribute("title", "Add Food to " + date.getDate());
-        //model.addAttribute("date", date);
-        //model.addAttribute("users", users);
+        model.addAttribute("title", "Add Person to " + date.getDate());
+        model.addAttribute("date", date);
         model.addAttribute("form", form);
 
         return "date/add-food";
@@ -133,35 +134,32 @@ public class FooddayController {
 
     @RequestMapping(value = "add-food", method = RequestMethod.POST)
     public String processAddUserForm(@ModelAttribute @Valid AddUserForm form, Errors errors,
-                                     @ModelAttribute String food, Model model,
-                                     @CookieValue(value="user", defaultValue = "none") String name) {
-
-        if(name.equals("none")) {
-            return "redirect:/user";
-        }
+                                     @ModelAttribute String food, Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Person");
-            //model.addAttribute("date", date);
-            //model.addAttribute("users", userDao.findAll());
-            //model.addAttribute("users", date.getUsers());
             model.addAttribute("form", form);
 
             return "date/add-food";
         }
 
-        //Foodday date = fooddayDao.findOne(id);
-        User aUser = userDao.findOne(form.getUserId());
-        Foodday aDate = fooddayDao.findOne(form.getDateId());
-        aDate.addPerson(aUser, food);
-        fooddayDao.save(aDate);
+        User user = userDao.findOne(form.getUserId());
+        Foodday date = fooddayDao.findOne(form.getDateId());
+        date.addPerson(user);
+        fooddayDao.save(date);
 
-        return "redirect:/date/view/" + aDate.getId();
+        return "redirect:/date/view/" + date.getId();
     }
 
 
     @RequestMapping(value = "remove-food/{dateId}", method = RequestMethod.GET)
-    public String displayRemovePersonForm(Model model) {
+    public String displayRemovePersonForm(Model model,
+                                          @CookieValue(value="user", defaultValue = "none") String name) {
+
+        if(name.equals("none")) {
+            return "redirect:/user";
+        }
+
         model.addAttribute("title", "Remove Person");
         model.addAttribute("persons", userDao.findAll());
 
@@ -171,12 +169,7 @@ public class FooddayController {
 
     @RequestMapping(value = "remove-food", method = RequestMethod.POST)
     public String processRemovePersonForm(@RequestParam int[] userIds,
-                                          @ModelAttribute Foodday date,
-                                          @CookieValue(value="user", defaultValue = "none") String name) {
-        if(name.equals("none")) {
-            return "redirect:/user";
-        }
-
+                                          @ModelAttribute Foodday date) {
         for (int userId : userIds) {
 
             userDao.delete(userId);
@@ -188,11 +181,16 @@ public class FooddayController {
 
     @RequestMapping(value = "edit-food/{personId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int dateId,
-                                  @RequestParam int userId, @ModelAttribute String food) {
+                                  @RequestParam int userId, @ModelAttribute String food,
+                                  @CookieValue(value="user", defaultValue = "none") String name) {
+
+        if(name.equals("none")) {
+            return "redirect:/user";
+        }
 
         User aUser = userDao.findOne(userId);
         Foodday date = fooddayDao.findOne(dateId);
-        //AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
+        AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
 
         if (aUser == null) {
             return "redirect:view/";
@@ -206,13 +204,8 @@ public class FooddayController {
 
     @RequestMapping(value = "edit-food", method = RequestMethod.POST)
     public String processEditForm(Model model, @ModelAttribute @Valid User user,
-                                  Errors errors, @ModelAttribute Foodday date, @RequestParam int userId,
-                                  @PathVariable int dateId, @ModelAttribute String food,
-                                  @CookieValue(value="user", defaultValue = "none") String name) {
-
-        if(name.equals("none")) {
-            return "redirect:/user";
-        }
+                                  Errors errors, @RequestParam int userId,
+                                  @PathVariable int dateId, @ModelAttribute String food) {
 
         if (errors.hasErrors()) {
 
@@ -224,9 +217,9 @@ public class FooddayController {
 
         User aUser = userDao.findOne(userId);
         aUser.setName(user.getName());
-        Foodday aDate = fooddayDao.findOne(dateId);
-        //AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
-        //aDate.setFood(aDate.getFood());
+        Foodday date = fooddayDao.findOne(dateId);
+        AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
+        form.setFood(form.getFood());
         userDao.save(aUser);
 
         return "redirect:/date/view/" + dateId;

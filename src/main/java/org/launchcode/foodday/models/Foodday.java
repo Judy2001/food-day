@@ -22,8 +22,6 @@ public class Foodday {
     @ManyToMany
     private List<User> users;
 
-    private String food;
-
 
     public Foodday() { }
 
@@ -33,7 +31,7 @@ public class Foodday {
     }
 
 
-    public void addPerson(User user, String food) {
+    public void addPerson(User user) {
         users.add(user);
     }
 
@@ -52,14 +50,6 @@ public class Foodday {
 
     public List<User> getUsers() {
         return users;
-    }
-
-    public String getFood() {
-        return food;
-    }
-
-    public void setFood(String food) {
-        this.food = this.food;
     }
 
 }

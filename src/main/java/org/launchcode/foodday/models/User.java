@@ -23,10 +23,6 @@ public class User {
     @Size(min=4, message = "Invalid password")
     private String password;
 
-/*    @NotNull
-    @Size(min=2, message = "Bring some food!")
-    private String food;*/
-
     @ManyToMany(mappedBy = "users")
     private List<Foodday> dates;
 
@@ -82,16 +78,8 @@ public class User {
         this.password = password;
     }
 
-/*    public String getFood() {
-        return food;
-    }
-
-    public void setFood(String food) {
-        this.food = food;
-    }*/
-
-/*    public List<Foodday> getDates() {
+    public List<Foodday> getDates() {
         return dates;
-    }*/
+    }
 
 }
