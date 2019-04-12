@@ -36,6 +36,7 @@ public class FooddayController {
             return "redirect:/user";
         }
 
+        //User u = userDao.findByName(name).get(0);
         model.addAttribute("title", "Food Days");
         model.addAttribute("dates", fooddayDao.findAll());
 
