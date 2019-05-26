@@ -96,10 +96,11 @@ public class UserController {
                                    HttpServletResponse response, Model model) {
 
         List<User> u = userDao.findByName(user.getName());
+        Iterable<User> users = userDao.findAll();
 
         if (u.isEmpty()) {
 
-            model.addAttribute("message", "Invalid name");
+            model.addAttribute("error", "Invalid name");
             model.addAttribute("title", "Login to Food Day!");
 
             return "user/login";
@@ -118,7 +119,7 @@ public class UserController {
 
         } else {
 
-            model.addAttribute("message", "Invalid password");
+            model.addAttribute("error", "Invalid password");
             model.addAttribute("title", "Login to Food Day!");
 
             return "user/login";

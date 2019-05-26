@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 public class Login extends User {
 
     @NotNull
-    @Size(min=3, max=30, message = "Username must be 3-30 characters long")
+    @Size(min=2, max=30, message = "Username must be 2-30 characters long")
     private String name;
 
     @NotNull

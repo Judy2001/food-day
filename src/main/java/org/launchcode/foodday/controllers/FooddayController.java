@@ -32,10 +32,6 @@ public class FooddayController {
     public String index(Model model,
                         @CookieValue(value="user", defaultValue = "none") String name) {
 
-        if(name.equals("none")) {
-            return "redirect:/user";
-        }
-
         //User u = userDao.findByName(name).get(0);
         model.addAttribute("title", "Food Days");
         model.addAttribute("dates", fooddayDao.findAll());
@@ -49,7 +45,7 @@ public class FooddayController {
                                      @CookieValue(value="user", defaultValue = "none") String name) {
 
         if(name.equals("none")) {
-            return "redirect:/user";
+            return "redirect:/user/index";
         }
 
         model.addAttribute("title", "Add Date");
@@ -70,7 +66,7 @@ public class FooddayController {
 
         fooddayDao.save(date);
 
-        return "redirect:";
+        return "redirect:view/" + date.getId();
     }
 
 
@@ -79,7 +75,7 @@ public class FooddayController {
                                         @CookieValue(value="user", defaultValue = "none") String name) {
 
         if(name.equals("none")) {
-            return "redirect:/user";
+            return "redirect:/user/index";
         }
 
         model.addAttribute("title", "Remove Date");
@@ -119,7 +115,7 @@ public class FooddayController {
                                      @CookieValue(value="user", defaultValue = "none") String name) {
 
         if(name.equals("none")) {
-            return "redirect:/user";
+            return "redirect:/user/index";
         }
 
         Foodday date = fooddayDao.findOne(dateId);
@@ -137,12 +133,12 @@ public class FooddayController {
     public String processAddUserForm(@ModelAttribute @Valid AddUserForm form, Errors errors,
                                      @ModelAttribute String food, Model model) {
 
-        if (errors.hasErrors()) {
+/*        if (errors.hasErrors()) {
             model.addAttribute("title", "Add Person");
             model.addAttribute("form", form);
 
             return "date/add-food";
-        }
+        }*/
 
         User user = userDao.findOne(form.getUserId());
         Foodday date = fooddayDao.findOne(form.getDateId());
@@ -158,7 +154,7 @@ public class FooddayController {
                                           @CookieValue(value="user", defaultValue = "none") String name) {
 
         if(name.equals("none")) {
-            return "redirect:/user";
+            return "redirect:/user/index";
         }
 
         model.addAttribute("title", "Remove Person");
@@ -186,7 +182,7 @@ public class FooddayController {
                                   @CookieValue(value="user", defaultValue = "none") String name) {
 
         if(name.equals("none")) {
-            return "redirect:/user";
+            return "redirect:/user/index";
         }
 
         User aUser = userDao.findOne(userId);
@@ -194,7 +190,7 @@ public class FooddayController {
         AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
 
         if (aUser == null) {
-            return "redirect:view/";
+            return "redirect:/date/view/";
         }
 
         model.addAttribute("title", "Edit Information");

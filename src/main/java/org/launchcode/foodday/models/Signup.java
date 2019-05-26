@@ -32,15 +32,6 @@ public class Signup extends User {
     }
 
 
-    public User createUser(){
-        User newUser = new User();
-        newUser.setName(this.name);
-        newUser.setPassword(this.password);
-
-        return (newUser);
-    }
-
-
     private void checkPassword() {
 
         if (password != null && verify != null && !password.equals(verify)) {

@@ -16,11 +16,11 @@ public class User {
     private int id;
 
     @NotNull
-    @Size(min=2, max=30, message = "Name must be between 2 and 25 characters long")
+    @Size(min=2, max=30, message = "Name must be between 2 and 30 characters long")
     private String name;
 
     @NotNull
-    @Size(min=4, message = "Invalid password")
+    @Size(min=3, max=30, message = "Password must be 3-30 characters long")
     private String password;
 
     @ManyToMany(mappedBy = "users")
@@ -30,9 +30,19 @@ public class User {
     public User() { }
 
 
+    public User createUser(){
+        User newUser = new User();
+        newUser.setName(this.name);
+        newUser.setPassword(this.password);
+
+        return (newUser);
+    }
+
+
     public User(String name, String password) {
         this.name = name;
         this.password = password;
+        createUser();
     }
 
 
