@@ -14,8 +14,9 @@
       <select name="userId">
         <option th:each="user : *{users}"
                 th:text="${user.name}"
-                th:value="${userId}"></option>
+                th:value="${user.id}"></option>
       </select>
+      <span th:errors="*{userId}" class="error"></span>
     </div>
 
     <div class="form-group">
@@ -25,7 +26,7 @@
     </div>
     <br />
 
-    <input type="hidden" name="dateId" th:value="*{dateId}" />
+    <input type="hidden" name="dateId" th:value="*{date.id}" />
 
     <input type="submit" value="Add Food" />
 

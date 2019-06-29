@@ -30,19 +30,19 @@ public class User {
     public User() { }
 
 
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
+        createUser();
+    }
+
+
     public User createUser(){
         User newUser = new User();
         newUser.setName(this.name);
         newUser.setPassword(this.password);
 
         return (newUser);
-    }
-
-
-    public User(String name, String password) {
-        this.name = name;
-        this.password = password;
-        createUser();
     }
 
 

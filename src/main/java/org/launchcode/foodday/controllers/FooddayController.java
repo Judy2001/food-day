@@ -122,7 +122,7 @@ public class FooddayController {
         AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
 
         model.addAttribute("title", "Add Person to " + date.getDate());
-        model.addAttribute("date", date);
+        //model.addAttribute("date", date);
         model.addAttribute("form", form);
 
         return "date/add-food";
@@ -131,16 +131,21 @@ public class FooddayController {
 
     @RequestMapping(value = "add-food", method = RequestMethod.POST)
     public String processAddUserForm(@ModelAttribute @Valid AddUserForm form, Errors errors,
-                                     @ModelAttribute String food, Model model) {
+                                     @ModelAttribute String food, @RequestParam int dateId, @RequestParam int userId, Model model) {
 
-/*        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Person");
+        if (errors.hasErrors()) {
+            Foodday date = fooddayDao.findOne(dateId);
+            //AddUserForm form = new AddUserForm(userDao.findAll(), food, date);
+
+            //model.addAttribute("title", "Add Person");
+            model.addAttribute("title", "Add Person to " + date.getDate());
+            model.addAttribute("date", date);
             model.addAttribute("form", form);
 
             return "date/add-food";
-        }*/
+        }
 
-        User user = userDao.findOne(form.getUserId());
+        User user = userDao.findOne(userId);
         Foodday date = fooddayDao.findOne(form.getDateId());
         date.addPerson(user);
         fooddayDao.save(date);
